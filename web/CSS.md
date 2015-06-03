@@ -208,6 +208,7 @@ margin: [ <length> | <percentage> | auto ]{1,4}
 ###### class选择比较严格 如果要选择 class="sports1 sports2", 使用.sports1是不行的，这样只能选择出z只含sports的类，要想选择本来的，必须使用sports1 sports2
 同时，也可以但是可以使用[class~=sports1]
 
+
 ```html
 <div>
   <p>Sample Paragraph</p>
@@ -269,7 +270,7 @@ margin: [ <length> | <percentage> | auto ]{1,4}
 
 `[attr^=val]` 可选择以`val`开头的属性值对应的元素，如果值为符号或空格则需要使用引号 `""`。
 
-`[attr$=val]` 可选择以`val`结尾的属性值对应的元素。
+`[attr$=val]` 可选择以`val`结尾的属性值对应的元素。比如[href$=pdf]
 
 `[attr*=val]` 可选择以包含`val`属性值对应的元素。
 
@@ -294,10 +295,10 @@ margin: [ <length> | <percentage> | auto ]{1,4}
 ##### 伪类选择器
 
 **常用伪类选择器**：
-- `:link`
+- `:link` 比如a:link
 - `:visited`
-- `:hover`
-- `:active`
+- `:hover` 比如 a:hover
+- `:active` 用户鼠标点击上的标识
 - `:enabled`
 - `:disabled`
 - `:checked`
