@@ -296,6 +296,7 @@ margin: [ <length> | <percentage> | auto ]{1,4}
 ##### 伪类选择器
 
 **常用伪类选择器**：
+
 - `:link` 比如a:link
 - `:visited`
 - `:hover` 比如 a:hover
@@ -315,7 +316,8 @@ margin: [ <length> | <percentage> | auto ]{1,4}
 - `:nth-last-of-type(2n)`
 
 **不常用伪类选择器**：
-- `:empty` 选中页面中无子元素的标签 如<p></p>p>
+
+- `:empty` 选中页面中无子元素的标签 如`<p></p>`
 - `:root` 选择 HTML 根标签
 - `:not()` 参数为一般选择器
 - `:target` 被锚点选中的目标元素
@@ -361,10 +363,11 @@ NOTE：请在使用时查找文档
 ##### 组合选择器
 
 class=main中
+
 - 后代选择器 `.main h2 {...}`，使用` `表示，只要是后代就选择
 - 子选择器 `.main>h2 {...}`，使用`>`表示，只有直系后代
 - 兄弟选择器 `h2+p {...}`，使用`+`表示 h2后边的第一个p
-    - `h2~p {...}`，使用`~`表示（此标签无需紧邻），h2后边的所有p
+- `h2~p {...}`，使用`~`表示（此标签无需紧邻），h2后边的所有p
 
 ##### 选择器分组
 
@@ -388,6 +391,7 @@ h1, h2, h3 {color: red;}
 ![](img/C/css-inherit-doc.png)
 
 自动继承属性：
+
 - color
 - font
 - text-align
@@ -395,6 +399,7 @@ h1, h2, h3 {color: red;}
 - ...
 
 非继承属性：
+
 - background
 - border
 - position
@@ -405,6 +410,7 @@ h1, h2, h3 {color: red;}
 CSS Specificity Calculator 可以在[这里](http://specificity.keegan.st/)找到。更多关于 CSS 优先级别的信息可以在[这里](https://css-tricks.com/specifics-on-css-specificity/)找到（英文）。
 
 计算方法：
+
 - a = 行内样式，在html里边一行中的style
 - b = id 选择器的数量
 - c = 类、伪类的属性选择器的数量
@@ -517,6 +523,8 @@ font: 30px/2 "Consolas", monospace;
 font: italic bold 20px/1.5 arial, serif;
 font: 20px arial, serif;
 
+如果只有 font:100px; 那么是不起作用的，因为必填项没有写全
+
 
 NOTE：当其他值为空时，均被设置为默认值。
 
@@ -537,7 +545,7 @@ element { color: rgba(255, 0, 0, 0.5); }
 element { color: hsla(0, 100%, 50%, 0.5); }
 
 /* 全透明 */
-element { color: transparent' }
+element { color: transparent }
 element { color: rgba(0, 0, 0, 0); }
 ```
 
@@ -547,9 +555,17 @@ element { color: rgba(0, 0, 0, 0); }
 
 `text-align: start | end | left | right | center | justify | match-parent | start end`
 
-NOTE：默认为文本左对齐。
+NOTE：默认为文本左对齐。justify为两端对齐
 
 ##### 文本垂直对齐
+
+常常会在一段文字中插入一个小表情，希望表情居中，这样就需要垂直对齐了。
+
+- baseline是基线
+- top对齐当前这一行的最高点
+- text-top对齐文字最高点
+- percentage参考的是line-height
+- 20px 以baseline为起点 往上走20px 如果是负的，就是往下走
 
 `vertical-align: baseline | sub | super | text-top | text-bottom | middle | top | bottom | <percentage> | <length>`
 
@@ -559,7 +575,7 @@ NOTE：`<percentage>`的参照物为`line-height`
 
 `text-indent: <length> | <percentage> && [ hanging || each-line ]`
 
-NOTE：缩进两个字可使用 `text-indent: 2em;`
+NOTE：缩进两个字可使用 `text-indent: 2em;` 百分比的参考就是容器的宽度
 
 #### 格式处理
 
