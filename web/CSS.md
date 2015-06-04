@@ -769,31 +769,36 @@ NOTE：默认情况元素的高度为内容高度。`max-height` 与 `min-height
 ![](img/P/padding-sample.png)
 
 `padding: [<length> | <percentage>]{1,4} | inherit`
+*顺时针顺序*
+设置对面相等，后者省略，四面相等，只设一个
+如
+20px= 20px 20px 20px 20px
+20px 10px = 20px 10px 20px 10px
+20px 10px 30px =20px 10px 30px 10px
 
 ##### margin
 
-![](../img/M/margin-sample.png)
+![](img/M/margin-sample.png)
 
 `margin: [<length> | <percentage> | auto]{1,4} | inherit`
 
 NOTE：`margin` 默认值为 `auto`
 
-Trick：
+ 可用于水平居中
+margin: 0 auto; auto的话浏览器自动去分配空间
 
-```
-/* 可用于水平居中 */
-margin: 0 auto;
-```
 
-###### margin 合并
+##### margin 合并
 
-![](../img/M/margin-merge.png)
+![](img/M/margin-merge.png)
 
-毗邻元素外间距（margin）会合并，既取相对较大的值。父元素与第一个和最后一个子元素的外间距也可合并。
+*毗邻元素外间距（margin）会合并，既取相对较大的值。*
+父元素与第一个和最后一个子元素的外间距也可合并。
+浮动与绝对定位的元素不会合并
 
 ##### border
 
-![](../img/B/border-sample.png)
+![](img/B/border-sample.png)
 
 ```
 border: [<br-width> || <br-style> || <color>] | inherit
@@ -806,18 +811,20 @@ NOTE：`border-color` 默认为元素字体颜色。
 
 ##### border-radius
 
-![](../img/B/border-radius-sample1.png)
+![](img/B/border-radius-sample1.png)
 
 ```
 /* 水平半径/垂直半径 */
 border-radius: [ <length> | <percentage> ]{1,4} [ / [ <length> | <percentage> ]{1,4} ]?
 ```
 
+border-radius:50%就出现了一个正圆
+
 NOTE：四个角的分解属性由左上角顺时针附值。
 
 ##### overflow
 
-![](../img/O/overflow-sample.png)
+![](img/O/overflow-sample.png)
 
 `overflow: visible | hidden | scroll | auto`
 
@@ -825,9 +832,9 @@ NOTE：默认属性为 `visible`。使用 `overflow-x` 与 `overflow-y` 单独�
 
 ##### box-sizing
 
-![](../img/B/box-sizing.png)
+![](img/B/box-sizing.png)
 
-![](../img/B/box-sizing1.png)
+![](img/B/box-sizing1.png)
 
 `box-sizing: content-box | border-box | inherit`
 
@@ -836,7 +843,7 @@ NOTE：默认属性为 `visible`。使用 `overflow-x` 与 `overflow-y` 单独�
 
 ##### box-shadow
 
-![](../img/B/box-shadow.png)
+![](img/B/box-shadow.png)
 
 `box-shadown: none | [inset? && [ <offset-x> <offset-y> <blur-radius>? <spread-radius>? <color>? ] ]#`
 
@@ -865,9 +872,9 @@ NOTE：`outline` 与 `border` 相似但无法分别设置四个方向的属性�
 
 #### TRBL
 
-![](../img/T/TRBL.png)
+![](img/T/TRBL.png)
 
-![](../img/B/border-radius-sample.png)
+![](img/B/border-radius-sample.png)
 
 TRBL (Top, Right, Bottom, Left) 即为顺时针从顶部开始。具有四个方向的属性都可以通过 `*-top` `*-right` `*-bottom` 与 `*-left` 单独对其进行设置。
 
@@ -964,7 +971,7 @@ background-position: right bottom;
 background-position: right 10px top 20px;
 ```
 
-![](../img/B/background-position.jpg)
+![](img/B/background-position.jpg)
 
 ##### Sprite 的使用
 
@@ -980,7 +987,7 @@ background-positon: 0 -100px
 
 **Gecko Reflow Visualisation**
 
-![](../img/G/gecko-reflow-visualisation.gif)
+![](img/G/gecko-reflow-visualisation.gif)
 
 ### 变形
 
