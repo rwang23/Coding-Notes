@@ -90,7 +90,6 @@ public class Average {
 
 ![StdDraw](/Users/Des/Documents/Coding/notes/image/StdDraw.png)
 
-
 #### debug的一种方式
 *通过assert来实现*
 
