@@ -651,6 +651,7 @@ p {
                3px 3px 5px blue;
 }
 ```
+第三个px是阴影的模糊半径
 
 1. value = The X-coordinate X 轴偏移像素
 2. value = The Y-coordinate Y 轴偏移像素
@@ -687,12 +688,15 @@ p.underover {
 ##### 省略字符
 
 `text-overflow: [ clip | ellipsis | <string> ]{1,2}`
+clip是默认值，有没有无所谓
 
 ```css
 /* 常用配合 */
-text-overflow: ellipsis;
-overflow: hidden; /* 溢出截取 */
-white-space: nowrap; /* 禁止换行 */
+p{
+  text-overflow: ellipsis;/*可以出现 ....的效果，所以要结合overflow：hidden 与white-space */
+  overflow: hidden; /* 溢出截取 */
+  white-space: nowrap; /* 禁止换行 */
+}
 ```
 
 ##### 更换鼠标形状
@@ -712,23 +716,28 @@ white-space: nowrap; /* 禁止换行 */
 - `<move>`
 
 ```css
-cursor: pointer;
-cursor: url(image-name.cur), pointer;
-/* 当 uri 失效时或者则会起作用 */
+a {
+  cursor: pointer;
+  cursor: url(image-name.cur), pointer;
+}
 ```
+
+设置了pointer的话，当 uri 失效时或者则会起作用
+
 
 ##### 强制继承
 
 `inherit` 会强制继承父元素的属性值。
 
 ```css
-font-size: inherit;
-font-family: inherit;
-font-weight: inherit;
-...
-word-wrap: inherit;
-work-break: inherit
-text-showdow: inherit
+p{
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  word-wrap: inherit;
+  work-break: inherit;
+  text-showdow: inherit;
+}
 ```
 
 NOTE：具体在使用时可查询文档
