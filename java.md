@@ -98,6 +98,8 @@ public class Average {
 assert index>=0 : "Negative index in method x";
 ```
 
+#####JAVA可以自动调用任意对象的toString()来进行输出
+
 
 
 
