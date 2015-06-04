@@ -637,23 +637,343 @@ wrap就是允许换行的意思
 NOTE：允许长单词自动换行。
 
 `word-break: normal | break-all | keep-all`
-
-NOTE：`break-all` 单词中的任意字母间都可以换行。
+NOTE： 使其从中断掉， 比如行最后出现一个单词，但是行不够长，多的字母就换行了
 
 #### 文本装饰
 
+##### 文字阴影
+
+`text-shadow:none | <shadow-t>#` 或 `text-shadow:none | [<length>{2,3}&&<color>?]#`
+
+```css
+p {
+  text-shadow: 1px 1px 1px #000,
+               3px 3px 5px blue;
+}
+```
+
+1. value = The X-coordinate X 轴偏移像素
+2. value = The Y-coordinate Y 轴偏移像素
+3. value = The blur radius  阴影模糊半径
+4. value = The color of the shadow 阴影颜色（默认为文字颜色）
+
+##### 文本装饰（下划线等）
+
+`text-decoration: <'text-decoration-line'> || <'text-decoration-style'> || <'text-decoration-color'>`
+
+```css
+h1.under {
+    text-decoration: underline;
+}
+h1.over {
+    text-decoration: overline;
+}
+p.line {
+    text-decoration: line-through;
+}
+p.blink {
+    text-decoration: blink;
+}
+a.none {
+    text-decoration: none;
+}
+p.underover {
+    text-decoration: underline overline;
+}
+```
+
 #### 高级设置
+
+##### 省略字符
+
+`text-overflow: [ clip | ellipsis | <string> ]{1,2}`
+
+```css
+/* 常用配合 */
+text-overflow: ellipsis;
+overflow: hidden; /* 溢出截取 */
+white-space: nowrap; /* 禁止换行 */
+```
+
+##### 更换鼠标形状
+
+`cursor: [[<funciri>,]* [ auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize| text | wait | help ]] | inherit`
+
+**常用属性**
+
+`cursor: [<uri>,]*[auto | default | none | help | pointer | zoom-in | zoom-out | move]`
+
+- `<uri>` 图片资源地址代替鼠标默认形状
+- `<default>` 默认光标
+- `<none>` 隐藏光标
+- `<pointer>` 手型光标
+- `<zoom-in>`
+- `<zoom-out>`
+- `<move>`
+
+```css
+cursor: pointer;
+cursor: url(image-name.cur), pointer;
+/* 当 uri 失效时或者则会起作用 */
+```
+
+##### 强制继承
+
+`inherit` 会强制继承父元素的属性值。
+
+```css
+font-size: inherit;
+font-family: inherit;
+font-weight: inherit;
+...
+word-wrap: inherit;
+work-break: inherit
+text-showdow: inherit
+```
+
+NOTE：具体在使用时可查询文档
 
 ### 盒模型
 
+#### 属性
+
+![](../img/B/box-module.jpg)
+
+##### width
+
+**内容盒子宽**
+
+`width: <length> | <percentage> | auto | inherit`
+
+NOTE：通常情况下百分比得参照物为元素的父元素。`max-width` 与 `min-width` 可以设置最大与最小宽度。
+
+##### height
+
+**内容盒子高**
+
+`height: <length> | <percentage> | auto | inherit`
+
+NOTE：默认情况元素的高度为内容高度。`max-height` 与 `min-height` 可以设置最大与最小高度。
+
+##### padding
+
+![](../img/P/padding-sample.png)
+
+`padding: [<length> | <percentage>]{1,4} | inherit`
+
+##### margin
+
+![](../img/M/margin-sample.png)
+
+`margin: [<length> | <percentage> | auto]{1,4} | inherit`
+
+NOTE：`margin` 默认值为 `auto`
+
+Trick：
+
+```
+/* 可用于水平居中 */
+margin: 0 auto;
+```
+
+###### margin 合并
+
+![](../img/M/margin-merge.png)
+
+毗邻元素外间距（margin）会合并，既取相对较大的值。父元素与第一个和最后一个子元素的外间距也可合并。
+
+##### border
+
+![](../img/B/border-sample.png)
+
+```
+border: [<br-width> || <br-style> || <color>] | inherit
+border-width: [<length> | thin | medium | thick]{1,4} | inherit
+border-style: [solid | dashed | dotted | ...]{1,4} |inherit
+border-colro: [<color> | transparent]{1,4} | inherit
+```
+
+NOTE：`border-color` 默认为元素字体颜色。
+
+##### border-radius
+
+![](../img/B/border-radius-sample1.png)
+
+```
+/* 水平半径/垂直半径 */
+border-radius: [ <length> | <percentage> ]{1,4} [ / [ <length> | <percentage> ]{1,4} ]?
+```
+
+NOTE：四个角的分解属性由左上角顺时针附值。
+
+##### overflow
+
+![](../img/O/overflow-sample.png)
+
+`overflow: visible | hidden | scroll | auto`
+
+NOTE：默认属性为 `visible`。使用 `overflow-x` 与 `overflow-y` 单独的设置水平和垂直方向的滚动条。
+
+##### box-sizing
+
+![](../img/B/box-sizing.png)
+
+![](../img/B/box-sizing1.png)
+
+`box-sizing: content-box | border-box | inherit`
+
+- `content-box` = 内容盒子宽高 + 填充（`Padding`）+ 边框宽（`border-width`）
+- `border-box` = 内容盒子宽高
+
+##### box-shadow
+
+![](../img/B/box-shadow.png)
+
+`box-shadown: none | [inset? && [ <offset-x> <offset-y> <blur-radius>? <spread-radius>? <color>? ] ]#`
+
+```html
+box-shadow: 4px  6px   3px  0px red;
+             |    |     |    |
+          水平偏移|     |    |
+               垂直偏移 |    |
+                    模糊半径 |
+                          阴影大小
+```
+
+NOTE：水平与垂直偏移可以为负值即相反方向偏移。颜色默认为文字颜色。阴影不占据空间，仅为修饰效果。
+
+##### outline
+
+```
+outline: [ <'outline-color'> || <'outline-style'> || <'outline-width'> ]
+outline-width: <length> | thin | medium | thick | inherit
+outline-style: solid | dashed | dotted | ... | inherit
+outline-color: <color> | invert | inherit
+/* invert 与当前颜色取反色 */
+```
+
+NOTE：`outline` 与 `border` 相似但无法分别设置四个方向的属性。`outline` 并不占据空间，而 `border` 占据空间，且显示位于 `border` 以外。
+
+#### TRBL
+
+![](../img/T/TRBL.png)
+
+![](../img/B/border-radius-sample.png)
+
+TRBL (Top, Right, Bottom, Left) 即为顺时针从顶部开始。具有四个方向的属性都可以通过 `*-top` `*-right` `*-bottom` 与 `*-left` 单独对其进行设置。
+
+#### 值缩写
+
+下面的值缩写以 `padding` 为例。
+
+> 对面相等，后者省略；四面相等，只设一个。
+
+```html
+/*      四面值 */
+padding: 20px;
+padding: 20px 20px 20px 20px;
+
+/*      上下值 右左值 */
+padding: 20px   10px;
+padding: 20px 10px 20px 10px;
+
+/*       上值 右左值 下值 */
+padding: 20px 10px   30px;
+padding: 20px 10px 30px 10px;
+```
+
 ### 背景
+
+#### background-color
+
+```
+background-color: <color>
+background-color: #f00;
+background-color: rgba(255, 0, 0, 0.5);
+background-color: transparent; /* 默认值 */
+```
+
+#### background-image
+
+```
+background-image: <bg-image>[, <bg-image>]*
+/* <bg-image> = <image> | none */
+background-image: url("../image/pic.png");
+background-image: url("../image/pic.png0"), url("../image/pic1.png");
+/* 多张背景图时，先引入的图片在上一层后引入则在下一层 */
+```
+
+NOTE：当`background-color` 与 `background-image` 共存时，背景颜色永远在最底层（于背景图片之下）。
+
+#### background-repeat
+
+`background-repeat` 需与背景图片数量一致。
+
+```
+background-repeat: <repeat-style>[, <repeat-style]*
+<repeat-style> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}
+
+/*                   X 轴     Y 轴 */
+background-repeat: no-repeat repeat;
+```
+
+- `space` 平铺并在水平和垂直留有空隙，空隙的大小为图片均匀分布后完整覆盖显示区域的宽高
+- `round` 不留空隙平铺且覆盖显示区域，图标会被缩放以达到覆盖效果（缩放不一定等比）
+
+#### background-attachment
+
+当页面内容超过显示区域时，使用 `local` 使背景图片同页面内容一同滚动。
+
+```
+background-attachment: <attachment>[, <attachment>]*
+<attachment> = scroll | fixed | local
+```
+
+#### background-position
+
+```
+background-position: <position>[, <position>]*
+<position> = [left|center|right|top|bottom|<percentage>|<length>]|[left|center|right|top|bottom|<percentage>|<length>] [left|center|right|top|bottom|<percentage>|<length>] | [center |[left|right][<percentage>|<length>]?]&&[center |[left|right][<percentage>|<length>]?]
+
+/* 默认位置为 */
+background-position: 0 0;
+
+/* percentage 是容器与图片的百分比重合之处*/
+background-position: 20% 50%;
+
+/* 等同效果 */
+background-position: 50% 50%;
+background-position: center center;
+
+background-position: 0 0;
+background-position: left top;
+
+background-position: 100% 100%;
+background-position: right bottom;
+
+/* 四个值时方向只为参照物 */
+background-position: right 10px top 20px;
+```
+
+![](../img/B/background-position.jpg)
+
+##### Sprite 的使用
+
+```html
+background-image: url(sprite.png)
+background-repeat: no-repeat;
+background-positon: 0 -100px
+```
+
+使用位置为负值将图片偏移使需要的图片位置上移并显示正确的图案。
 
 ### 布局
 
 **Gecko Reflow Visualisation**
 
-![](img/G/gecko-reflow-visualisation.gif)
+![](../img/G/gecko-reflow-visualisation.gif)
 
 ### 变形
 
 ### 动画
+
