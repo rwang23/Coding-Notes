@@ -58,12 +58,12 @@ public class StdOut{
 ```java
 public class RandomSeq {
 	public static void main(String[] arg) {
-		int N =Integer.parseInt(arg[0]);
+		int N = Integer.parseInt(arg[0]);
 		double lo = Double.parseDouble(arg[1]);
 		double hi = Double.parseDouble(arg[2]);
-		for(int i=0;i<N;i++){
-			double x=StdRandom.uniform(lo,hi);
-			StdOut.printf("%.2f\n",x);
+		for (int i = 0; i < N; i++) {
+			double x = StdRandom.uniform(lo, hi);
+			StdOut.printf("%.2f\n", x);
 		}
 	}
 }
@@ -73,15 +73,15 @@ public class RandomSeq {
 ##### 使用StdIn的例子
 
 ```java
-public class Average{
-	public static void main(String[] arg){
-		double sum=0.0;
-		int cnt=0;
-		while(!StdIn.isEmpty()){
-			sum+=StdIn.readDouble();
+public class Average {
+	public static void main(String[] arg) {
+		double sum = 0.0;
+		int cnt = 0;
+		while (!StdIn.isEmpty()) {
+			sum += StdIn.readDouble();
 			cnt++;
 		}
-		double avg = sum/cnt;
+		double avg = sum / cnt;
 		StdOut.printf("Average is %.5f\n,avg");
 	}
 }
