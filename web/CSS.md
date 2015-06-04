@@ -8,13 +8,16 @@ CSS (Cascading Stylesheet) 它用于设置页面的表现。CSS3 并不是一个
 ![](img/C/css3-history.png)
 
 **CSS 引入方法**
+
+
 ```html
-// 外部样式表
+
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+```
 
-// 内部样式表
+```html
 <head>
   <style type="text/css">
     p {
@@ -22,8 +25,6 @@ CSS (Cascading Stylesheet) 它用于设置页面的表现。CSS3 并不是一个
     }
   </style>
 </head>
-
-// 内嵌样式(可在动态效果中同 JavaScript 一同使用)
 <p style="color: red">Sample Text</p>
 ```
 
@@ -404,7 +405,7 @@ h1, h2, h3 {color: red;}
 CSS Specificity Calculator 可以在[这里](http://specificity.keegan.st/)找到。更多关于 CSS 优先级别的信息可以在[这里](https://css-tricks.com/specifics-on-css-specificity/)找到（英文）。
 
 计算方法：
-- a = 行内样式
+- a = 行内样式，在html里边一行中的style
 - b = id 选择器的数量
 - c = 类、伪类的属性选择器的数量
 - d = 标签选择器和伪元素选择器的数量
@@ -422,7 +423,7 @@ value = a * 1000 + b * 100 + c * 10 + d
 
 - 改变样式声明先后顺序
 - 提升选择器优先级，比如加一点标签什么的
-- `!important`（慎用）
+- `!important`（谨慎使用）
 
 ##### 层叠
 
@@ -439,18 +440,22 @@ value = a * 1000 + b * 100 + c * 10 + d
 - `<absolute-size>` 有 small large medium
 - `<relative-size>` 有 smaller larger
 
-```stylus
-div
+```css
+div{
   font-size 12px
-  p#sample0
-    font-size 16px
-  p#sample1
-    font-size 2em
-  p#sample2
-    font-size 200%
+}
+p#sample0{
+  font-size 16px
+}
+p#sample1{
+  font-size 2em
+}
+p#sample2{
+  font-size 200%
+}
 ```
 
-NOTE：以上两值在开发中并不常用。`2em` 与 `200%` 都为父元素默认大小的两倍（参照物为父元素的字体大小 `12px`）。
+NOTE：以上两值在开发中并不常用。`2em` 与 `200%` 都为*父元素默认大小的两倍*（参照物为父元素的字体大小 `12px`）。
 
 ##### 改变字体
 
@@ -458,25 +463,21 @@ NOTE：以上两值在开发中并不常用。`2em` 与 `200%` 都为父元素�
 
 `<generic-family>` 可选选项，但具体使用字体由浏览器决定
 - serif
-- sans-serif
+- sans-serif 微软雅黑
 - cursive
 - fantasy
 - monospace
 
-```css
+*设置多个字体*
 font-family: arial, Verdana, sans-serif;
-```
-
 NOTE：优先使用靠前的字体
 
 ##### 加粗字体
 
 `font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900`
-
-```css
 font-weight: normal;
 font-weight: bold;
-```
+
 
 ##### 倾斜字体
 
