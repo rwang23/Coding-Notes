@@ -908,7 +908,7 @@ padding: 20px 10px 30px 10px;
 #### background-color
 
 ```
-background-color: <color>
+background-color: <color> 默认是transparant 透明的
 background-color: #f00;
 background-color: rgba(255, 0, 0, 0.5);
 background-color: transparent; /* 默认值 */
@@ -920,28 +920,30 @@ background-color: transparent; /* 默认值 */
 background-image: <bg-image>[, <bg-image>]*
 /* <bg-image> = <image> | none */
 background-image: url("../image/pic.png");
-background-image: url("../image/pic.png0"), url("../image/pic1.png");
+background-image: url("../image/pic.png0"), url("../image/pic1.png"); 所以背景图片可以有多个
 /* 多张背景图时，先引入的图片在上一层后引入则在下一层 */
+background image在background的上层。
 ```
 
 NOTE：当`background-color` 与 `background-image` 共存时，背景颜色永远在最底层（于背景图片之下）。
 
 #### background-repeat
 
-`background-repeat` 需与背景图片数量一致。
+`background-repeat` 需与背景图片数量一致。有几个图片就要几个repeat
 
 ```
 background-repeat: <repeat-style>[, <repeat-style]*
 <repeat-style> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}
 
 /*                   X 轴     Y 轴 */
-background-repeat: no-repeat repeat;
+background-repeat: no-repeat repeat; 第一个显示x平铺形式，第二个显示y平铺。 如果有多个北京，需要加上逗号写上，否则跟第一个背景平铺形式一样
 ```
 
 - `space` 平铺并在水平和垂直留有空隙，空隙的大小为图片均匀分布后完整覆盖显示区域的宽高
-- `round` 不留空隙平铺且覆盖显示区域，图标会被缩放以达到覆盖效果（缩放不一定等比）
+- `round` 不留空隙平铺且覆盖显示区域，图标会被缩放以达到覆盖效果这样背景不会溢出（缩放不一定等比）
 
 #### background-attachment
+在滚动的时候，背景跟内容一起滚动
 
 当页面内容超过显示区域时，使用 `local` 使背景图片同页面内容一同滚动。
 
@@ -949,17 +951,21 @@ background-repeat: no-repeat repeat;
 background-attachment: <attachment>[, <attachment>]*
 <attachment> = scroll | fixed | local
 ```
+`scroll是默认值`内容动，背景不懂
+`local`一起动
+`fixed`几乎不用
+
 
 #### background-position
 
-```
+```html
 background-position: <position>[, <position>]*
 <position> = [left|center|right|top|bottom|<percentage>|<length>]|[left|center|right|top|bottom|<percentage>|<length>] [left|center|right|top|bottom|<percentage>|<length>] | [center |[left|right][<percentage>|<length>]?]&&[center |[left|right][<percentage>|<length>]?]
 
 /* 默认位置为 */
 background-position: 0 0;
 
-/* percentage 是容器与图片的百分比重合之处*/
+/* percentage 是图片所处的位置，20%就是容器的20%长 */
 background-position: 20% 50%;
 
 /* 等同效果 */
