@@ -628,6 +628,8 @@ NOTE：缩进两个字可使用 `text-indent: 2em;` 百分比的参考就是容�
  </tbody>
 </table>
 
+wrap就是允许换行的意思
+
 ##### 文字换行
 
 `word-wrap: normal | break-word`
