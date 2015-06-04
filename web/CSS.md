@@ -475,15 +475,15 @@ NOTE：优先使用靠前的字体
 ##### 加粗字体
 
 `font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900`
-font-weight: normal;
-font-weight: bold;
+font-weight: normal; 就是平常的字体，可写可不写
+font-weight: bold; 字体加粗
 
 
 ##### 倾斜字体
 
 `font-style: normal | italic | oblique | inherit`
 
-`italic` 使用字体中的斜体，而 `oblique` 在没有斜体字体时强制倾斜字体。
+`italic` 使用字体中的斜体，而 `oblique` 在没有斜体字体时强制倾斜字体。所以经常使用italic
 
 ##### 更改行距
 
@@ -491,27 +491,32 @@ font-weight: bold;
 
 `normal` 值为浏览器决定，在1.1至1.2之间（通常设置值为1.14左右）
 
-```css
+
 /* length 类型 */
 line-height: 40px;
-line-height: 3em;
+line-height: 3em;   /em表示当前字体的大小，如果字体为30px大，那么行高为90px
+
 /* percentage 类型 */
-line-height: 300%;
+line-height: 300%; /与em同理
+
 /* number 类型 */
 line-height: 3;
-```
 
-NOTE：当`line-height`为 `number` 类型时，子类直接继承其数值（不计算直接继承）。而当为 `percentage` 类型时，子类则会先计算再显示（先计算后继承）。
+
+NOTE：当`line-height`为 `number` 类型时，子类直接继承其数值（不计算直接继承）,如果之后字体变了，那么line-height变为新值的三倍
+而当为 `percentage` 类型时，子类则会先计算line-height再显示（先计算后继承），所以如果之后字体变了，还是原来的line-height。
 
 ##### font shorthand
 
 `font: [ [ <‘font-style’> || <font-variant-css21> || <‘font-weight’> || <‘font-stretch’> ]? <‘font-size’> [ / <‘line-height’> ]? <‘font-family’> ] | caption | icon | menu | message-box | small-caption | status-bar`
 
-```css
+通常使用 font-style font-weight font-size /line-height font-family
+font-size font-family是必须
+
 font: 30px/2 "Consolas", monospace;
 font: italic bold 20px/1.5 arial, serif;
 font: 20px arial, serif;
-```
+
 
 NOTE：当其他值为空时，均被设置为默认值。
 
