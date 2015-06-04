@@ -64,6 +64,17 @@ cd到要拷贝的git的文件夹
 
 分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！
 
+####添加SSH后
+
+1. If you already have your SSH keys set up and are still getting the password prompt, make sure your repo URL is in the form `git+ssh://git@github.com/username/reponame.git` as opposed to `https://github.com/username/reponame.git`
+
+2. To see your repo URL, run:
+`git remote show origin`
+You can change the URL with git remote set-url like so: `git remote set-url origin git+ssh://git@github.com/username/reponame.git`
+
+
+
+
 ####从远程库克隆到本地
 进入要克隆到的文件夹，
 `git clone git@github.com:michaelliao/gitskills.git`

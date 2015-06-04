@@ -746,7 +746,7 @@ NOTE：具体在使用时可查询文档
 
 #### 属性
 
-![](../img/B/box-module.jpg)
+![](img/B/box-module.jpg)
 
 ##### width
 
@@ -766,7 +766,7 @@ NOTE：默认情况元素的高度为内容高度。`max-height` 与 `min-height
 
 ##### padding
 
-![](../img/P/padding-sample.png)
+![](img/P/padding-sample.png)
 
 `padding: [<length> | <percentage>]{1,4} | inherit`
 
