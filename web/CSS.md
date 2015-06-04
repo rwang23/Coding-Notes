@@ -828,7 +828,8 @@ NOTE：四个角的分解属性由左上角顺时针附值。
 
 `overflow: visible | hidden | scroll | auto`
 
-NOTE：默认属性为 `visible`。使用 `overflow-x` 与 `overflow-y` 单独的设置水平和垂直方向的滚动条。
+NOTE：默认属性为 `visible`。
+使用 `overflow-x` 与 `overflow-y` 单独的设置水平和垂直方向的滚动条。
 
 ##### box-sizing
 
@@ -845,9 +846,10 @@ NOTE：默认属性为 `visible`。使用 `overflow-x` 与 `overflow-y` 单独�
 
 ![](img/B/box-shadow.png)
 
-`box-shadown: none | [inset? && [ <offset-x> <offset-y> <blur-radius>? <spread-radius>? <color>? ] ]#`
+`box-shadown: none | <shadow> [,<shadow>]*`
+`<shadow>: [inset? && [ <offset-x> <offset-y> <blur-radius>? <spread-radius>? <color>? ] ]#`
 
-```html
+```
 box-shadow: 4px  6px   3px  0px red;
              |    |     |    |
           水平偏移|     |    |
@@ -855,6 +857,9 @@ box-shadow: 4px  6px   3px  0px red;
                     模糊半径 |
                           阴影大小
 ```
+box-shadow: inset 4px  6px   3px  0px red;
+设置为内阴影
+可以内外阴影叠加
 
 NOTE：水平与垂直偏移可以为负值即相反方向偏移。颜色默认为文字颜色。阴影不占据空间，仅为修饰效果。
 
