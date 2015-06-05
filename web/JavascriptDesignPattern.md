@@ -1,5 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [JavaScript 程序设计](#javascript-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)
   - [JavaScript 介绍](#javascript-%E4%BB%8B%E7%BB%8D)
@@ -73,9 +74,28 @@
 
 ![](img/J/javascript-env.png)
 
+
+####Javascript Chrome调试
+
+- Element ：查看本页面的HTML结构和CSS样式，并可进行修改，查看即时修改后的效果，但页面刷新后会失效。
+
+- Network ：查看 HTTP 请求的相关信息，各资源的网络损耗等情况，主要用于查看网页的加载时间,以此为标准对某些资源进行优化。
+
+- TimeLine ： 查看脚本的执行时间、页面元素渲染时间等信息，详细显示每个时间活动占用的CPU和内存，用于优化html性能。
+
+- Profiles ：查看 CPU 执行时间与内存占用等信息,优化js脚本和DOM结构。
+
+- Resource ：查看当前页面所请求的资源文件。
+
+- Audits ：让Chrome给你的网页进行审查，看哪些是不必要的内容，优化前端页面，加速网页加载速度等。
+
+- Console ：控制台，调试JS的运行结果，并可执行在控制台临时编辑的JS代码。
+
+- Sources ：查看资源文件。用于对js进行调试，左面有所有js代码的列表，中间是代码区域，右边是断点、触发器、调用栈等
+
 **JavaScript**的引入方法如下：
 
-```javascript
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -301,7 +321,7 @@ p.move(2,2);
 
 **构造器对象与普通对象的区别**
 
-![](img/O/object-with-constructor-and-regular-object.png)
+![](../img/O/object-with-constructor-and-regular-object.png)
 
 1. 构造器对象原型链中的 `__proto__` 是一个 `Function.prototype` 对象的引用，因此可以调用 `Function.prototype`的属性及方法
 1. 构造器对象本身有一个 `prototype` 属性，用该构造器实例化对象时该 `prototype` 会被实例对象的 `__proto__` 所引用
