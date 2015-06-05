@@ -276,14 +276,20 @@ var obj0 = new Object();
 - 可以是标准类型（Null 除外）//所以通常用来识别基本数据类型
 - 不可识别具体的对象类型（Function 除外）
 
+![typeof](/Users/Des/Documents/Coding/notes/web/img/T/typeof.png)
+
 **Object.prototype.toString**：
-- 可是识别标准类型及内置对象类型（例如，Object, Date, Array）
+- 可识别标准类型及内置对象类型（例如，Object, Date, Array）
 - 不能识别自定义对象类型
+
+![Object.prototype.toString](/Users/Des/Documents/Coding/notes/web/img/O/object-prototype-tostring.png)
 
 **constructor**：
 - 可以识别标准类型（Undefined/Null 除外）
 - 可识别内置对象类型
 - 可识别自定义对象类型
+
+![constructor](/Users/Des/Documents/Coding/notes/web/img/C/constructor.png)
 
 ```javascript
 function getConstructiorName(obj) {
@@ -296,6 +302,8 @@ getConstructiorName([]) === "Array"; // true
 - 不可判别原始类型
 - 可判别内置对象类型
 - 可判别自定义对象类型
+
+![instanceof](/Users/Des/Documents/Coding/notes/web/img/img/instanceof.png)
 
 ## 内置对象
 
