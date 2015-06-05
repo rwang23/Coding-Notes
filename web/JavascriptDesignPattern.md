@@ -128,8 +128,8 @@
 **变量**的命名
 
 ```javascript
-var _name = null;
-var $name = null;
+var _name = null; //下划线符号放在前面是合法的
+var $name = null; //美元符号放在前面是合法的
 var name0 = null;
 ```
 
@@ -139,7 +139,7 @@ JavaScript 在语言定义中保留的字段，这些字段在语言使用中存
 
 ### 字符敏感
 
-字符串的大小写是有所区分的，不同字符指代不同的变量。
+字符串的大小写是有所区分的，不同字符指代不同的变量，而且JS其他也要符合大小写。
 
 ### 严格模式
 
@@ -166,7 +166,7 @@ JavaScript 在语言定义中保留的字段，这些字段在语言使用中存
 
 严格模式与标准模式的区别：
 
-- 严格模式下隐式声明或定义变量被静止
+- 严格模式下隐式声明或定义变量被静止（即变量必须先声明）
 - 严格模式下对象重名的属性在严格模式下被静止
 - 严格模式下 `arguments.callee()` 被禁用
 - 严格模式下 `with()` 语句
@@ -190,7 +190,7 @@ JavaScript 在语言定义中保留的字段，这些字段在语言使用中存
 
 **原始类型**：
 
-- Undefined
+- Undefined //具体见下
 - Null
 - Boolean
 - String
@@ -219,6 +219,8 @@ var obj0 = new Object();
 - 无返回值函数的执行结果 `function f(){}; var obj = f();`
 - 函数参数没有传入 `function f(i){console.log(i)}; f();`
 - `void(expression)`
+
+undefined转化为boolean为false,转化为Number为NaN,转化成string是“undefined”
 
 **Null** 值：null 出现场景：
 
