@@ -1008,7 +1008,7 @@ background-image: linear-gradient(to right bottom, red, blue);
 background-image: linear-gradient(0deg, red, blue);
 background-image: linear-gradient(45deg, red, blue);
 background-image: linear-gradient(red, green, blue);
-background-image: linear-gradient(red, green 20%, blue);
+background-image: linear-gradient(red, green 20%, blue);  20%是位置
 ```
 
 ![](img/L/linear-gradient.jpg)
@@ -1047,7 +1047,7 @@ background-image: repeating-radial-gradient(red, blue 20px, red 40px);
 
 ![](img/B/background-box-model.png)
 
-决定背景 (0,0) 坐标与 100% 坐标的区域。默认值为 `padding-box`。
+决定背景 (0,0) 坐标与 100% 坐标的区域。默认值为 `padding-box`。决定了是在padding-box content-box还是border-box显示
 
 ```
 <box>[, <box>]*
@@ -1078,6 +1078,7 @@ background-clip: border-box;
 background-clip: padding-box;
 background-clip: content-box;
 ```
+同时设置background-origin:content-box，就是刚好符合大小的裁剪
 
 ![](img/B/background-clip.jpg)
 

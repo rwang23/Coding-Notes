@@ -18,7 +18,7 @@
 * 要随时掌握工作区的状态，使用`git status`命令。
 * 如果`git status`告诉你有文件被修改过，用`git diff`可以查看修改内容,这里查看的是暂存区与工作区的不同。
 * 也可以是用`git diff --cached`或者是`git diff --staged`这是查看已经暂存的文件与上次提交的快照之间的差异
-* 使用`git log`来查看git commit记录 
+* 使用`git log`来查看git commit记录
 * 也可以使用`git log --pretty=oneline` 一行显示
 * `git log -p -2` -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新
 *  `git log --stat`显示简要的更改行数统计
@@ -55,7 +55,7 @@ HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历�
 ####从本地拷贝到远程库
 cd到要拷贝的git的文件夹
 
-1. 要关联一个远程库，使用命令 `git remote add origin git@server-name:path/repo-name.git`； 
+1. 要关联一个远程库，使用命令 `git remote add origin git@server-name:path/repo-name.git`；
 2. 比如 `git remote add origin git@github.com:rwang23/xx.git`
 
 2. 关联后，使用命令`git push -u origin master`第一次推送master分支的所有内容,如果不是master分支，换名字就可以；
@@ -103,7 +103,7 @@ Git鼓励大量使用分支：
 同时 可以使用 git log 或者git log --graph指令来查看分支与分支合并情况
 
 通常情况下使用合并分支Git会自动使用`Fast forward`模式，但是这种情况下删除分支后，会丢失分支信息，
-这个时候我们可以使用--no-ff方式下的`git merge`，它会提交一个新的commit 
+这个时候我们可以使用--no-ff方式下的`git merge`，它会提交一个新的commit
 `git merge --no-ff -m "merge with no-ff" dev`
 
 
@@ -155,7 +155,7 @@ Git鼓励大量使用分支：
 
 ###创建标签
 * 命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
-* git tag commit_id 在该commit_id上打上标签 
+* git tag commit_id 在该commit_id上打上标签
 * git tag -a <tagname> -m "blablabla..." commit_id可以指定标签信息；
 * git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
 * 命令git tag可以查看所有标签。
@@ -179,7 +179,7 @@ Git鼓励大量使用分支：
 2. 增加该git的远程原始分支（我的分支）到本地（增加之后，需要用`git remote -v`命令里确认是否有这个远程分支）
 `git remote add aliasname git@github.com:rwang23/xx.git`
 
-3. 命令：`git remote -v` 会发现多出来了一个远程分支。含有Push与fetch 
+3. 命令：`git remote -v` 会发现多出来了一个远程分支。含有Push与fetch
 
 4. 然后把远程原始分支代码拉到本地
 `git fetch aliasname`
