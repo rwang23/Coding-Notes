@@ -219,21 +219,23 @@ var obj0 = new Object();
 - 无返回值函数的执行结果 `function f(){}; var obj = f();`
 - 函数参数没有传入 `function f(i){console.log(i)}; f();`
 - `void(expression)`
-
-undefined转化为boolean为false,转化为Number为NaN,转化成string是“undefined”
+- undefined转化为boolean为false,转化为Number为NaN,转化成string是“undefined”
 
 **Null** 值：null 出现场景：
 
 - 获取不存在的对象 `document.getElementById('not-exist-element')`
+- null转化为boolean为false,转化为Number为0,转化成string是“null”
 
 **Boolean** 值：true, false 出现场景：
 
 - 条件语句导致的系统执行的隐式类型转换 `if(隐式转换){}`
-- 字面量或变量定义 `var bool = true;`
+- 字面量或变量定义 `var a = true;`
+- true转化为string 是null， false是“false”
 
 **String** 值：字符串 出现场景：
 
 - `var str = 'Hello, world!';`
+- 空字符串""转化为Number是0
 
 **Number** 值：整型直接量，八进制直接量（0-），十六进制直接量（0x-)，浮点型直接量 出现场景：
 
@@ -271,7 +273,7 @@ undefined转化为boolean为false,转化为Number为NaN,转化成string是“und
 - `instanceof`
 
 **typeof**：
-- 可以是标准类型（Null 除外）
+- 可以是标准类型（Null 除外）//所以通常用来识别基本数据类型
 - 不可识别具体的对象类型（Function 除外）
 
 **Object.prototype.toString**：
