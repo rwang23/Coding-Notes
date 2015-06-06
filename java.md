@@ -17,6 +17,11 @@ public class Euclid {
 	}
 }
 ```
+== means the reference equals
+equals() means the value equals
+
+When you declare a variable to be final, you are promising to assign it a value only once, either in an initializer or in the constructor.
+
 
 ### 递归
 递归代码有以下三个特点，违反了就可能得到错误或低效的代码:
