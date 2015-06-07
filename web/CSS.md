@@ -1119,7 +1119,7 @@ background-size: contain;
 background: url(red.png) 0 0/20px 20px no-repeat, url(blue.png) 50% 50%/contain no-repeat content-box green;
 ```
 
-![](imgB/background-shorthand.png)
+![](img/B/background-shorthand.png)
 
 ### 布局
 
@@ -1160,9 +1160,28 @@ Firefox 布局可视化 **Gecko Reflow Visualisation**，布局是指浏览器�
 
 `display:none` 与 `visibility:hidden` 的区别为 `display:none` 不显示且不占位，但 `visibility:hidden` 不显示但占位。
 
-![](../img/G/gecko-reflow-visualisation.gif)
+![](img/G/gecko-reflow-visualisation.gif)
 
-#### position
+##### IE 兼容
+display:inline-block;在ie6、ie7下只有设置在默认显示方式为inline的元素上才会生效，请实现兼容ie6、ie7的通用的方式
+div {display:inline-block; *zoom:1;*display:inline;}
+
+
+##### 块居中
+使用 margin{ 0px auto}
+让块自动平分margin
+#####居中导航
+```html
+<ul>
+	<li></li>
+	<li></li>
+</ul>
+```
+ul text-align:center  li display:inline-block
+
+
+
+#### position：可以来解决用户登陆框
 
 `position` 用于设置定位的方式与`top` `right` `bottom` `left` `z-index` 则用于设置参照物位置（必须配合定位一同使用）。
 
@@ -1172,36 +1191,54 @@ position: static | relative | absolute | fixed
 
 ```
 
+- {top:xxpx left:xxpx} 距离上边缘，距离左边缘
+- 如果同时有top bottom那么这个元素块离上边缘 下边缘
+
+##### z-index
+
+- 元素叠加之后，在z轴上的排序，z越高，越在上边（也不一定，见z-index栈）
+
+##### z-index栈
+
+- 如果父元素的z-index更高，那么父元素高的在上边，尽管可能另一个子元素z-index很高，但是父元素很低
+- 如果没有z-index，那么根据元素块位置来覆盖
+
+##### posotion:static
+
+- 默认
+
 ##### position:relative
 
 - 相对定位的元素仍在文档流之中，并按照文档流中的顺序进行排列。
-- 参照物为元素本身的位置。
+- 参照物为元素本身的位置,所以设置了top left之类的属性，就会在原来的位置偏移这些
 
 NOTE：最常用的目的为改变元素层级和设置为绝对定位的参照物。
 
-![](../img/P/position-relative.png)
+![](img/P/position-relative.png)
 
 ##### position:absolute
 
-- 默认宽度为内容宽度
+- 默认宽度为*内容宽度*
 - 脱离文档流
-- 参照物为第一个定位祖先或根元素（HTML 元素）
+- 参照物为第一个定位祖先或HTML根元素,如果参考物是父元素（也就是父元素设置了position），那么top left就是相对于父元素来说的
+- 所以经常给参考物设置Postion:relative
 
-![](../img/P/position-absolute.png)
+![](img/P/position-absolute.png)
 
 ##### position:fixed
 
-- 默认宽度为内容宽度
+- 默认宽度为*内容宽度*
 - 脱离文档流
 - 参照物为视窗
+- 区域是固定的
 
-NOTE：宽高的100%的参照依然为视窗（例：网页遮罩效果）
+NOTE：宽高的100%的参照依然为浏览器视窗（例：网页遮罩效果，dimmer）
 
-![](../img/P/position-fixed.png)
+![](img/P/position-fixed.png)
 
 ##### top/right/bottom/left
 
-![](../img/L/layout-position.png)
+![](img/L/layout-position.png)
 
 其用于设置元素边缘与参照物边缘的距离，且设置的值可为负值。在同时设置相对方向时，元素将被拉伸。
 
@@ -1209,13 +1246,13 @@ NOTE：宽高的100%的参照依然为视窗（例：网页遮罩效果）
 
 其用于设置 Z 轴上得排序，默认值为 0 但可设置为负值。（如不做设置，则按照文档流的顺序排列。后面的元素将置于前面的元素之上）
 
-![](../img/L/layouy-position-zindex.png)
+![](img/L/layouy-position-zindex.png)
 
-###### z-index 栈
+##### z-index 栈
 
 父类容器的 `z-index` 优于子类 `z-index` 如图
 
-![](../img/L/layout-position-zindex-stack.jpg)
+![](img/L/layout-position-zindex-stack.jpg)
 
 #### float
 
@@ -1229,15 +1266,15 @@ float: left | right | none | inherit
 - 脱离文档流（会被父元素边界阻挡与`position`脱离文档流的方式不同）
 - 指的方向一直移动
 
-![](../img/F/float-right.png)
+![](img/F/float-right.png)
 
 **float 元素在同一文档流中**，当同时进行 `float` 时它们会按照文档流中的顺序排列。(当所有父元素中的所有元素脱离文档流之后，父元素将失去原有默认的内容高度)
 
-![](../img/F/float-right-all.jpg)
+![](img/F/float-right-all.jpg)
 
 **float 元素是半脱离文档流的**，对元素是脱离文档流，但对于内容则是在文档流之中的（既元素重叠但内容不重叠）。
 
-![](../img/F/float-half-off.png)
+![](img/F/float-half-off.png)
 
 ##### clear
 
@@ -1267,7 +1304,7 @@ clear: both | left | right | none | inherit
 
 #### flex
 
-![](../img/F/flex-container-and-item.jpg)
+![](img/F/flex-container-and-item.jpg)
 
 弹性布局可用于多行自适应，多列自适应，间距自适应和任意对齐。
 
@@ -1302,7 +1339,7 @@ display: flex
 flex-direction: row | row-reverse | column | column-reverse
 ```
 
-![](../img/F/flex-direciton.png)
+![](img/F/flex-direciton.png)
 
 ###### flex-wrap
 
@@ -1311,7 +1348,7 @@ flex-direction: row | row-reverse | column | column-reverse
 flex-wrap: nowrap | wrap | wrap-reverse
 ```
 
-![](../img/F/flex-wrap.png)
+![](img/F/flex-wrap.png)
 
 ###### flex-flow
 
@@ -1321,7 +1358,7 @@ flex-wrap: nowrap | wrap | wrap-reverse
 flex-flow: <'flex-direction'> || <'flex-wrap'>
 ```
 
-![](../img/F/flex-flow.png)
+![](img/F/flex-flow.png)
 
 ###### order
 
@@ -1332,8 +1369,8 @@ order: <integer>
 <!-- 默认为 0 -->
 ```
 
-![](../img/F/flex-order0.png)
-![](../img/F/flex-order1.png)
+![](img/F/flex-order0.png)
+![](img/F/flex-order1.png)
 
 ##### flex 弹性
 
@@ -1357,9 +1394,9 @@ initial: 0
 <!-- 默认值为 0 -->
 ```
 
-![](../img/F/flex-grow0.png)
-![](../img/F/flex-grow1.png)
-![](../img/F/flex-grow2.png)
+![](img/F/flex-grow0.png)
+![](img/F/flex-grow1.png)
+![](img/F/flex-grow2.png)
 
 ###### flex-shrink
 
@@ -1375,7 +1412,7 @@ initial: 1
 
 remain 为负值，既超出的区域。
 
-![](../img/F/flex-shrink.png)
+![](img/F/flex-shrink.png)
 
 ###### flex
 
@@ -1397,7 +1434,7 @@ justify-content: flex-start | flex-end | center | space-between | space-around
 <!-- 默认值为 flex-start -->
 ```
 
-![](../img/F/flex-justify-content.png)
+![](img/F/flex-justify-content.png)
 
 ###### align-items
 
@@ -1408,7 +1445,7 @@ align-items: flex-start | flex-end | center | baseline | stretch
 <!-- 默认值为 stretch -->
 ```
 
-![](../img/F/flex-align-items.png)
+![](img/F/flex-align-items.png)
 
 ###### align-self
 
@@ -1419,7 +1456,7 @@ align-self: auto | flex-start | flex-end | center | baseline | stretch
 <!-- 默认值为 auto -->
 ```
 
-![](../img/F/flex-align-self.png)
+![](img/F/flex-align-self.png)
 
 ###### align-content
 
@@ -1430,10 +1467,9 @@ align-content:flex-start | flex-end | center | space-between | space-around | st
 <!-- 默认为 stretch -->
 ```
 
-![](../img/F/flex-align-content.png)
+![](img/F/flex-align-content.png)
 
 ### 变形
 
 ### 动画
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />This work by <a xmlns:cc="http://creativecommons.org/ns#" href="li-xinyang.com" property="cc:attributionName" rel="cc:attributionURL">Li Xinyang</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
