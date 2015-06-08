@@ -1209,7 +1209,7 @@ position: static | relative | absolute | fixed
 
 ##### position:relative
 
-- 相对定位的元素仍在文档流之中，并按照文档流中的顺序进行排列。
+- 相对定位的元素*仍在文档流之中*，并按照文档流中的顺序进行排列。
 - 参照物为元素本身的位置,所以设置了top left之类的属性，就会在原来的位置偏移这些
 
 NOTE：最常用的目的为改变元素层级和设置为绝对定位的参照物。
@@ -1235,6 +1235,8 @@ NOTE：最常用的目的为改变元素层级和设置为绝对定位的参照�
 NOTE：宽高的100%的参照依然为浏览器视窗（例：网页遮罩效果，dimmer）
 
 ![](img/P/position-fixed.png)
+
+##### 经常需要设置absolute fixed不脱离文档流，这样我们就需要使用float
 
 ##### top/right/bottom/left
 
