@@ -139,8 +139,7 @@ When you declare a variable to be final, you are promising to assign it a value 
 
 - == means the reference equals
 - equals() means the value equals
-
-
+- x.equals(null) returns false
 
 
 ### 递归
@@ -150,14 +149,6 @@ When you declare a variable to be final, you are promising to assign it a value 
 * 递归总是尝试去解决一个规模更小的子问题
 * 递归调用的父问题域尝试解决的子问题之间不应该有交集
 
-###扩展库
-![Java random API](/Users/Des/Documents/Coding/notes/image/java\ random\ api.png)
-
-###类型转换
-#####Java内置了一些类以及其静态转换函数
-
-
-
 #### debug的一种方式
 *通过assert来实现*
 
@@ -165,13 +156,123 @@ When you declare a variable to be final, you are promising to assign it a value 
 assert index>=0 : "Negative index in method x";
 ```
 
-#####JAVA可以自动调用任意对象的toString()来进行输出
+###Generics
 
+- 声明 public class FixedCapacityStack<Item>，之后相关类型都是Item
+- 但是generics里因为语法原因不能构造数组，如 a = new Item[cap]
+- 解决办法是 a = (Item[]) new Object[cap]
 
+###Iterator
 
+- import java.util.Iterator
 
+## Stack
 
+###数组实现的Stack
+####固定长度的Stack+resize
+```java
+public class FixedCapacityStack<Item> {
 
+	private Item[] stack;
+	private int N = 0;
+
+	public FixedCapacityStack(int capacity) {
+		stack = (Item[]) new Object[capacity];
+	}
+
+	public int size() {
+		return N;
+	}
+
+	/**
+	 * [resize the stack]
+	 * @param max [the new length]
+	 */
+	private void resize(int max) {
+		Item[] temp = (Item[]) new Object[max];
+		for (int i = 0; i < N; i++) {
+			temp[i] = stack[i];
+		}
+		stack = temp;
+	}
+
+	public boolean isEmpty() {
+		return N == 0;
+	}
+
+	/**
+	 * [push, and can resize according to the length]
+	 * @param item [description]
+	 */
+	public void push(Item item) {
+		if (N == stack.length) {
+			resize(2 * stack.length);
+		}
+		stack[N++] = item;
+	}
+
+	public Item pop() {
+		return stack[--N];
+	}
+
+}
+```
+
+###Linked list实现stack
+
+- The difference is that it is easier to insert items into the sequence and to remove items from the sequence with linked lists.
+
+```java
+private class Node{
+	Item item;
+	Node next;
+}
+```
+- 头部添加新node
+
+```java
+Node oldFirst = first;
+first = new Node();
+first.item = "xx";
+first.next = oldFirst;
+```
+
+- 头部删除node
+
+```java
+first.next = first;
+```
+
+- 尾部添加Node
+
+```java
+Node oldLast = last;
+last = new Node();
+last.item = "xx";
+oudLast.next = last;
+```
+- 遍历node
+
+```java
+for(Node x =first; x!=null; x=x.next){
+}
+```
+
+##算法分析
+###时间测量
+```java
+public class Stopwatch {
+	private final long start;
+	public Stopwatch() {
+		start = System.currentTimeMillis();
+	}
+	public double elapsedTime() {
+		long now = System.currentTimeMillis();
+		return (now - start) / 1000.0;
+	}
+}
+
+```
 
 
 
