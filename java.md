@@ -444,6 +444,9 @@ public class Example {
 ```
 
 ###快速排序
+
+- 原地切分
+
 ```java
 	public static void toQuicksort(Comparable[a]) {
 		StdRandom.shuffle(a);
