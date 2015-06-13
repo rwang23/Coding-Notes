@@ -166,6 +166,34 @@ assert index>=0 : "Negative index in method x";
 
 - import java.util.Iterator
 
+###Comparable
+!(http://www.digizol.com/2008/07/java-sorting-comparator-vs-comparable.html)
+
+- 使用Comparable去定义输入参数的时候，表明这个方法，能支持Comparable的primitive variable都支持
+- Example: Comparable里边的compareTo帮助class在进行collection.sort(List)自动排序
+- 测试的时候，使用Collections.sort(coll)
+
+```java
+public class Employee implements Comparable<Employee>{
+	private int empid;
+	private String name;
+	private int age;
+	public int compareTo(Employee o){
+		return this.empid - o.empid;
+	}
+}
+```
+- 如果想对其他项进行排序，就是用Comparator
+- 测试的时候，使用Colletions.sort(coll, new EmpSortByName())
+
+```java
+public class EmpSortByName implements Comparator<Employee>{
+	public int compare(Employee o1, Employee o2){
+		return o1.getName().compareTo(o2.getName());
+	}
+}
+```
+
 ## Stack
 
 ###数组实现的Stack
@@ -274,7 +302,72 @@ public class Stopwatch {
 
 ```
 
+##排序
 
+- 模板
+
+```java
+public class Example {
+	public static void sort(Comparable[] a) {
+
+	}
+
+	public static boolean less(Comparable v, Comparable w) {
+		return v.compareTo(w) < 0;
+	}
+
+	private static void exch(Comparable[] a, int i, int j) {
+		Comparable t = a[i];
+		a[i] = a[j];
+		a[j] = t;
+	}
+
+	private static void show(Comparable[] a) {
+		for (int i = 0; i < a.length; i++) {
+			StdOut.print(a[i] + " ");
+		}
+		StdOut.println();
+	}
+
+	public static boolean isSorted(Comparable[] a) {
+		for (int i = 1; i < a.length; i++) {
+			if (less(a[i], a[i - 1])) {
+				return false;
+			}
+			return true;
+		}
+	}
+
+	public static void main(String[] args) {
+		String[] a = In.readStrings();
+		sort(a);
+		assert isSorted(a);
+		show(a);
+	}
+
+
+}
+
+```
+###选择排序
+
+- Running time is insensitive to input. 如果已经排好序，再进行选择排序，将花费一样的时间
+- Data movement is minimal. 数据只交换了N次
+
+```java
+	public static void sort(Comparable[] a) {
+		int N = a.length;
+		for (int i = 0; i < N; i++) {
+			int min = i;
+			for (int j = i; j < N; j++) {
+				if (less(a[j], a[i]))
+					min = j;
+			}
+			exch(a, i, min);
+		}
+
+	}
+```
 
 
 
