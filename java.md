@@ -355,19 +355,119 @@ public class Example {
 - Data movement is minimal. 数据只交换了N次
 
 ```java
-	public static void sort(Comparable[] a) {
+	public static void selectSort(Comparable[] a) {
 		int N = a.length;
 		for (int i = 0; i < N; i++) {
 			int min = i;
-			for (int j = i; j < N; j++) {
-				if (less(a[j], a[i]))
+			for (int j = i+1; j < N; j++) {
+				if (less(a[j], a[min]))
 					min = j;
 			}
 			exch(a, i, min);
 		}
-
 	}
 ```
 
+###插入排序
+
+- 基本比选择排序快一倍
+
+```java
+	public static void insertSort(Comparable[] a) {
+		int N = a.length;
+		for (int i = 1; i < N; i++) {
+			for (int j = i ; j > 0 && less(a[j], a[j - 1]); j--) {
+				exch(a, j, j - 1);
+			}
+		}
+	}
+```
+
+###希尔排序
+
+```java
+	public static void shellSort(Comparable[] a) {
+		int h = 1;
+		int N = a.length;
+		while (h < n / 3) {
+			h = h * 3 + 1;
+		}
+		while (h >= 1) {
+			for (i = h; i < N; i = i++) {
+				for (j = i; j >= h && less(a[j], a[j - h]); j = j - h) {
+					exch(a, j, j - h);
+				}
+				h = h / 3;
+			}
+		}
+	}
+```
+
+###归并排序
+
+- 复杂度为NlgN
+
+```java
+	private static Comparable[] aux;
+	public static void merge(Comparable[] a, int lo, int mid, int hi) {
+		int i = lo;
+		int j = mid + 1;
+		for (int k = lo; k <= hi; k++) {
+			aux[k] = a[k];
+		}
+		for (int k = lo; k <= hi; k++) {
+			if (i > mid) a[k] = aux[j++];
+			else if (j > hi) a[k] = aux[i++];
+			else if (less(aux[i], aux[j])) a[k] = aux[i++];
+			else a[k] = aux[j++];
+		}
+	}
+	public static void toMergeSort(Comparable[] a) {
+		aux = new Comparable[a.length];
+		mergeSortUB(a, 0, a.length);
+	}
+	public static void mergeSortUB(Comparable[] a, int lo, int hi) {
+		if (hi <= lo) return;
+		int mid = (lo + hi) / 2;
+		mergeSortUB(a, lo, mid);
+		mergeSortUB(a, mid + 1, hi);
+		merge(a, lo, mid, hi);
+	}
+	public static void mergeSortBU(Comparable[] a) {
+		int N = a.length;
+		aux = new Comparable[N];
+		for (int sz = 1; sz < N; sz = sz + sz) {
+			for (int lo = 0; lo < N - sz; lo += sz + sz)
+				merge(a, lo, lo + sz + 1, Math.min(lo + sz + sz - 1, N - 1));
+		}
+	}
+```
+
+###快速排序
+```java
+	public static void toQuicksort(Comparable[a]) {
+		StdRandom.shuffle(a);
+		quickSort(a, 0, a.length - 1);
+	}
+	private static void quickSort(Comparable[a], int lo, int hi) {
+		if (hi <= lo) return;
+		int j = partition(a, lo, hi);
+		quickSort(a, lo, j - 1);
+		quickSort(a, j + 1, hi);
+	}
+	private static int partition(Comparable[a], int lo, int hi) {
+		int i =lo;
+		int j=hi+1;
+		Comparable v = a[lo];
+		while(true){
+			while(less(a[++i],v)) if(i==hi) break;
+			while(less(v,a[--j])) if(j==lo) break;
+			if(i>=j) break;
+			exch(a,i,j);
+		}
+		exch(a,lo,j);
+		return j;
+	}
+```
 
 
