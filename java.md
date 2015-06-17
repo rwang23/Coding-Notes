@@ -589,6 +589,12 @@ public static void sort(Comparable[] a){
 
 ##Searching
 
+###symbol-table implementations compare
+
+![symbol-table implementations compare](/Users/Des/Documents/Coding/notes/image/symbol-table\ implementations.png )
+
+
+
 ###Simple Table
 
 - value and key pair, like dictionary
@@ -697,8 +703,28 @@ public Node(Key key, Value val, Node next)
         keys[i] = key; vals[i] = val;
         N++;
      }
-     public void delete(Key key)
+     public void delete(Key key){
      // See Exercise 3.1.16 for this method.
+	 }
+
+	public Key min()
+	{
+		return keys[0];
+	}
+	public Key max()
+	{
+		return keys[N-1];
+	}
+	public Key select(int k)
+	{
+		return keys[k];
+	}
+	public Key ceiling(Key key)
+	{
+		int i = rank(key);
+		return keys[i];
+	}
+
 }
 ```
 
