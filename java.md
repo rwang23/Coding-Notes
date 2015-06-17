@@ -303,8 +303,12 @@ public class Stopwatch {
 ```
 
 ##排序
+###对比
 
-- 模板
+![sort compare](/Users/Des/Documents/Coding/notes/image/sortcompare.png)
+
+
+### 模板
 
 ```java
 public class Example {
@@ -472,5 +476,116 @@ public class Example {
 		return j;
 	}
 ```
+
+###Priority Queues
+
+- 二叉树
+- 能够直接得到最小值最大值，第几大值，因为在建立树的时候已经排好序了，不需要再去遍历查找了
+
+```java
+
+public class MaxPQ<Key extends Comparable<Key>> {
+
+	private Key[] pq;
+	private int N = 0;
+
+	public MaxPQ() {
+		this(1);
+	}
+
+	public MaxPQ(int max) {
+		pq = (Key[]) new Comparable[max + 1];
+
+	}
+
+	public MaxPQ(Key[] a) {
+		pq = a;
+	}
+
+
+	public boolean isEmpty() {
+		return N == 0;
+	}
+
+	public int size() {
+		return N;
+	}
+
+	public boolean less(int i , int j) {
+		return pq[i].compareTo(pq[j]) < 0;
+	}
+
+	public void exch(int i, int j) {
+		Key temp = pq[i];
+		pq[i] = pq[j];
+		pq[j] = temp;
+	}
+
+
+
+	public void insert(Key v) {
+		pq[++N] = v;
+		swim(N);
+	}
+
+	public Key max() {
+		return pq[1];
+	}
+
+	public Key delMax() {
+		Key max = pq[1];
+		exch(1, N--);
+		pq[N + 1] = null;
+		sink(1);
+		return max;
+	}
+
+	public void swim(int k) {
+
+		while (less(k, k / 2) && k > 1) {
+			exch(k, k / 2);
+			k = k / 2;
+		}
+
+	}
+
+	public void sink(int k) {
+		while (2 * k <= N) {
+			int j = 2 * k;
+			if (less(j, j + 1)) {
+				j++;
+			}
+			if (less(k, j)) {
+				exch(k, j);
+				k = j;
+			} else {
+				break;
+			}
+		}
+
+	}
+
+}
+
+```
+
+### HeapSort
+
+```java
+public static void sort(Comparable[] a){
+	int N = a.length;
+	for(int k = N/2; k >= 1; k++) //构造heap,对除了最底层的元素进行sink，最后所有子树都满足父母比孩子大，但是最底层孩子之间不一定有序
+		sink(a,k,N);
+	while(N>1){ //交换首项与末项再沉淀交换，最终可以把最小的放在首项
+		exch(a,1,N--);
+		sink(a,1,N);
+	}
+}
+```
+- less than 2N*LgN + 2N 次比较
+- 图示
+！[heapsort](/Users/Des/Documents/Coding/notes/image/heapsort.png )
+
+
 
 
