@@ -584,8 +584,73 @@ public static void sort(Comparable[] a){
 ```
 - less than 2N*LgN + 2N 次比较
 - 图示
-！[heapsort](/Users/Des/Documents/Coding/notes/image/heapsort.png )
+![heapsort](/Users/Des/Documents/Coding/notes/image/heapsort.png )
 
 
+##Searching
 
+###Simple Table
+
+- value and key pair, like dictionary
+
+#### 判断相等
+
+- if x and y are String values, then x.equals(y) is true if and only if x and y have the same length and are identical in each character position.
+- For such client-defined keys, you need to override equals()
+- we use equals() (for symbol tables where keys are not Comparable) or compareTo() (for or- dered symbol tables with Comparable keys)
+
+####client
+```java
+public static void main(String[] args)
+  {
+     ST<String, Integer> st;
+     st = new ST<String, Integer>();
+     for (int i = 0; !StdIn.isEmpty(); i++)
+     {
+        String key = StdIn.readString();
+        st.put(key, i);
+     }
+     for (String s : st.keys())
+        StdOut.println(s + " " + st.get(s));
+}
+
+```
+
+
+#### Linked-list Simple Table Implementation
+![Linked-list Simple Table Implementation](/Users/Des/Documents/Coding/notes/image/Linked-list\ Simple\ Table\ Implementation.png)
+
+```java
+public class SequentialSearchST<Key, Value>
+￼{
+private Node first;
+private class Node
+{  // linked-list node
+// first node in the linked list
+Key key;
+Value val;
+Node next;
+public Node(Key key, Value val, Node next)
+{
+   this.key  = key;
+   this.val  = val;
+   this.next = next;
+} }
+     public Value get(Key key)
+     {  // Search for key, return associated value.
+        for (Node x = first; x != null; x = x.next)
+           if (key.equals(x.key))
+              return x.val;    // search hit
+        return null;           // search miss
+}
+     public void put(Key key, Value val)
+     {  // Search for key. Update value if found; grow table if new.
+        for (Node x = first; x != null; x = x.next)
+           if (key.equals(x.key))
+           {  x.val = val; return;  }      // Search hit: update val.
+        first = new Node(key, val, first); // Search miss: add new node.
+     }
+}
+
+```
 
