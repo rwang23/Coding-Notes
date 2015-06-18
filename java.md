@@ -749,3 +749,14 @@ public Node(Key key, Value val, Node next)
 }
 ```
 
+###Binary Search Tree
+
+- Graph Illustration
+![BST](/Users/Des/Documents/Coding/notes/image/BST.png)
+
+- Constructing and Inserting
+![BST Constructing and Inserting](/Users/Des/Documents/Coding/notes/image/BST\ Constructing\ and\ Inserting.png )
+
+
+
+
