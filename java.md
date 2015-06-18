@@ -135,6 +135,27 @@ When you declare a variable to be final, you are promising to assign it a value 
 
 -  Boolean, Byte, Character, Double, Float, Integer, Long, and Short correspond to boolean, byte, char, double, float, int, long, and short
 
+#### datatype casting
+
+- Implicit casting :A data type of lower size (occupying less memory) is assigned to a data type of higher size
+
+```java
+int x = 10; // occupies 4 bytes
+double y = x; // occupies 8 bytes
+System.out.println(y); // prints 10.0
+```
+
+- Explicit casting: A data type of higher size (occupying more memory) cannot be assigned to a data type of lower size.
+
+```java
+double x = 10.5; // 8 bytes
+int y = x; // 4 bytes ; raises compilation error
+```
+
+- Boolean casting: A boolean value cannot be assigned to any other data type. Except boolean, all the remaining 7 data types can be assigned to one another either implicitly or explicitly; but boolean cannot.
+
+- byte –> short –> int –> long –> float –> double
+
 #### Equality
 
 - == means the reference equals
