@@ -1000,4 +1000,11 @@ public class BST<Key extends Comparable<Key>, Value> {
 		}
 ```
 
+###Balanced Search Tree
+####2-3 tree
+
+![2-3 tree](/Users/Des/Documents/Coding/notes/image/2-3\ tree.png)
+
+####Red-Black BST
+![red black tree](/Users/Des/Documents/Coding/notes/image/red-black\ tree.png)
 
