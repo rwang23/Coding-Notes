@@ -610,6 +610,8 @@ public static void sort(Comparable[] a){
 
 ##Searching
 
+![Symbol-table compare](/Users/Des/Documents/Coding/notes/image/symbol-table\ compare.png)
+
 ###symbol-table implementations compare
 
 ![symbol-table implementations compare](/Users/Des/Documents/Coding/notes/image/symbol-table\ implementations.png )
@@ -1003,8 +1005,160 @@ public class BST<Key extends Comparable<Key>, Value> {
 ###Balanced Search Tree
 ####2-3 tree
 
+
+
 ![2-3 tree](/Users/Des/Documents/Coding/notes/image/2-3\ tree.png)
 
 ####Red-Black BST
+
+- 2-3 树的另一种实现方式
+- 右边枝没有红树，如果有就要翻转到左
+- 两个孩子都是红，则要取红树
+
 ![red black tree](/Users/Des/Documents/Coding/notes/image/red-black\ tree.png)
+
+- left rotate
+
+![Left rotate](/Users/Des/Documents/Coding/notes/image/Left\ rotate.png)
+
+
+- right rotate
+
+![Right rotate](/Users/Des/Documents/Coding/notes/image/Right\ rotate.png)
+
+- insert
+
+![insert rotate](/Users/Des/Documents/Coding/notes/image/RedBlackTreeRotate.png)
+![insert rotate at bottom](/Users/Des/Documents/Coding/notes/image/insert\ rotate\ at\ bottom.png)
+
+- flipColor
+
+![RedBlackTreeflipcolor](/Users/Des/Documents/Coding/notes/image/RedBlackTreeflipcolor.png)
+
+###Hash table
+memory usage:
+- separate chaning: 48N+64M
+- linear probing: 32N - 128N
+- BSTs: 56N
+
+
+```java
+ int hash = 0;
+  for (int i = 0; i < s.length(); i++)
+     hash = (R * hash + s.charAt(i)) % M;
+```
+
+- Hashing is a classic example of a time-space tradeoff. If there were no memory limitation, then we could do any search with only one memory access by simply using the key as an index in a (potentially huge) array.
+- It turns out that we can trade off time and memory in hashing algorithms by adjusting parameters
+- we need a different hash function for each key type that we use.
+- if a.equals(b) is true, then a.hashCode() must have the same numerical value as b.hashCode()
+- Converting a hashCode() to an array index：
+
+```java
+    private int hash(Key x)
+    {  return (x.hashCode() & 0x7fffffff) % M;  }
+```
+- User-defined hashCode():
+
+```java
+ public int hashCode()
+     {
+         int hash = 17;
+         hash = 31 * hash + who.hashCode();
+         hash = 31 * hash + when.hashCode();
+         hash = 31 * hash
+             + ((Double) amount).hashCode();
+         return hash;
+}
+```
+####separate chaining
+
+![separate chaning](/Users/Des/Documents/Coding/notes/image/separate\ chaning.pn)
+
+```java
+public class SeparateChainingHashST<Key, Value> {
+
+    private int N;                           // number of key-value pairs
+    private int M;                           // hash table size
+    private SequentialSearchST<Key, Value>[] st;  // array of ST objects
+
+    public SeparateChainingHashST()
+    {  this(997);  }
+
+    public SeparateChainingHashST(int M) {
+        // Create M linked lists.
+        this.M = M;
+        st = (SequentialSearchST<Key, Value>[]) new SequentialSearchST[M];
+        for (int i = 0; i < M; i++)
+            st[i] = new SequentialSearchST();
+    }
+
+    private int hash(Key key)
+    {  return (key.hashCode() & 0x7fffffff) % M; }
+
+    public Value get(Key key)
+    {  return (Value) st[hash(key)].get(key);  }
+
+    public void put(Key key, Value val)
+    {  st[hash(key)].put(key, val);  }
+
+    public Iterable<Key> keys(){}
+    // See Exercise 3.4.19.
+}
+
+```
+
+####linear probing
+
+- Key equal to search key: search hit
+- Empty position (null key at indexed position): search miss
+- Key not equal to search key: try next entry
+
+```java
+public class LinearProbingHashST<Key, Value> {
+
+   private int N; // number of key-value pairs in the table
+   private int M = 16; // size of linear-probing table
+   private Key[] keys; // the keys
+   private Value[] vals;  // the values
+
+   public LinearProbingHashST() {
+      keys = (Key[])   new Object[M];
+      vals = (Value[]) new Object[M];
+   }
+
+   private int hash(Key key) {
+      return (key.hashCode() & 0x7fffffff) % M;
+   }
+
+   private void resize(int cap) {
+      LinearProbingHashST<Key, Value> t;
+      t = new LinearProbingHashST<Key, Value>(cap);
+      for (int i = 0; i < M; i++)
+         if (keys[i] != null)
+            t.put(keys[i], vals[i]);
+      keys = t.keys;
+      vals = t.vals;
+      M    = t.M;
+   }
+
+   public void put(Key key, Value val) {
+      if (N >= M / 2) resize(2 * M); // double M (see text)
+      int i;
+      for (i = hash(key); keys[i] != null; i = (i + 1) % M)
+         if (keys[i].equals(key)) { vals[i] = val; return; }
+      keys[i] = key;
+      vals[i] = val;
+      N++;
+   }
+   public Value get(Key key) {
+      for (int i = hash(key); keys[i] != null; i = (i + 1) % M)
+         if (keys[i].equals(key))
+            return vals[i];
+      return null;
+   }
+}
+
+```
+
 
