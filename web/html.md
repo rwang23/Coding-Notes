@@ -163,7 +163,8 @@ img中套用map以及area可以实现点击某部分图片进入一个链接，�
 
 #### 表格
 学会使用*rowspan*来进行跨行显示
-```html
+
+
 <table class="reference notranslate">
   <tbody><tr>
     <th style="width:22%">Value</th>
@@ -263,7 +264,7 @@ img中套用map以及area可以实现点击某部分图片进入一个链接，�
       </tr>
     </tbody>
 </table>
-```
+
 
 ### 表格以及Input
 
@@ -274,7 +275,7 @@ img中套用map以及area可以实现点击某部分图片进入一个链接，�
 现在也有新的Input type类型
 比如email,url,number,tel,search,range,color,date picker(date,month,week,time)
 
-```html
+
 <form action="WebCreation_submit" method="get" accept-charset="utf-8">
   <fieldset>
     <legend>title or explanatory caption</legend>
@@ -294,7 +295,7 @@ img中套用map以及area可以实现点击某部分图片进入一个链接，�
   <button type="submit">Submit</button>
   <button type="reset">Reset</button>
 </form>
-```
+
 
 ### 语义化
 
@@ -445,6 +446,7 @@ NOTE：具体所需可在使用时查询，无需记忆。
 
 ###浏览器兼容
 主流浏览器都兼容HTML5的新标签，对于 IE8 及以下版本不认识 HTML5的新元素，可以使用 JavaScript 创建一个没用的元素来解决，例如：
+
 ```javascript
 <script>document.createElement("header");</script>
 ```
