@@ -1475,7 +1475,8 @@ align-items: flex-start | flex-end | center | baseline | stretch
 
 ###### align-self
 
-其用于设置单个 `flex-item` 在 cross-axis 方向上的对其方式。
+- 其用于设置单个 `flex-item` 在 cross-axis 方向上的对其方式。
+- align-items justify-content是设置全部在flex中的元素的
 
 ```
 align-self: auto | flex-start | flex-end | center | baseline | stretch
@@ -1486,7 +1487,7 @@ align-self: auto | flex-start | flex-end | center | baseline | stretch
 
 ###### align-content
 
-其用于设置 cross-axis 方向上的对其方式。
+其用于设置 cross-axis 方向上的对其方式。针对多行元素
 
 ```
 align-content:flex-start | flex-end | center | space-between | space-around | stretch
@@ -1497,5 +1498,482 @@ align-content:flex-start | flex-end | center | space-between | space-around | st
 
 ### 变形
 
+#### 2D 变形
+
+[2D 变形示例代码](CSS/Transform2D.html)
+
+##### transform
+
+`transform` 中可以写一个或多个方法。
+
+```
+transform: none | <transform-function>+
+transform: none
+<!-- 默认值为 none -->
+transform: <transform-function>+
+
+transform: translate(50%) rotate(45deg);
+transform: rotate(45deg) transform(50%)
+<!-- 变形函数顺序普通结果不同，原因是坐标位置发生了改变 -->
+```
+
+![](img/T/transform-transform-function.png)
+
+###### rotate()
+
+```
+rotate(<angle>)
+
+rotate(45deg);
+<!-- 右边旋转，顺时针 -->
+rotate(-60deg);
+<!-- 左边旋转，逆时针 -->
+```
+
+![](img/T/transform-rotate.png)
+
+###### transform-origin
+
+其用于设置原点的位置（默认位置为元素中心）第一值为 X 方向，第二值为 Y 方向， 第三值为 Z 方向。（当值空出未写的情况下默认为 50%）
+
+```
+transform-origin: [ <percentage> | <length> | left | center | right | top | bottom] | [ [ <percentage> | <length> | left | center | right ] && [ <percentage> | <length> | top | center | bottom ] ] <length>?
+
+<!-- 默认值为 50% 50% -->
+
+transform-origin: 50% 50%;
+transform-origin: 0 0;
+transform-origin: right 50px 20px;
+transform-origin: top right 20px;
+```
+
+![](img/T/transform-origin.png)
+
+###### translate()
+
+移动方法，参数分别代表 X 与 Y 轴的移动（偏移值均可为负值）。
+
+```
+translate(<translation-value>[, <translation-value>]?)
+
+<!-- 也可单独设置 X 与 Y 轴的偏移 -->
+translationX(<translation-value>)
+translationY(<translation-value>)
+
+transform: translate(50px);
+transform: translate(50px, 20%);
+<!-- Y 轴偏移为偏移对象的高度，X 轴为宽度 -->
+transform: translate(-50px);
+transform: translate(20%);
+```
+
+![](img/T/transform-traslate.png)
+
+###### scale()
+
+缩放方法，参数分别代表 X 与 Y 轴的缩放（缩放值均可为小数）。当第二值忽略时，默认设置为等同第一值。
+
+```
+scale(<number> [, <number>]?)
+
+scaleX(<number>)
+scaleY(<number>)
+
+<!-- 整体放大 1.2 倍 -->
+transform: scale(1.2);
+<!-- 高度拉伸 -->
+transform: scale(1, 1.2);
+<!-- 宽度拉伸 -->
+transform: scaleX(1.2);
+<!-- 高度拉伸 -->
+transform: scaleY(1.2);
+```
+
+![](img/T/transform-scale.png)
+
+###### skew()
+
+其为倾斜的方法。第一值为 Y 轴往 X 方向倾斜（逆时针），第二值为 X 轴往 Y 方向倾斜（顺时针）。（倾斜值可为负值）
+
+```
+skew(<angle>[, <angle>]?)
+
+skewX(<angle>)
+skewY(<angle>)
+
+transform: skew(30deg);
+transform: skew(30deg, 30deg);
+transform: skewX(30deg);
+transform: skewY(30deg);
+```
+
+![](img/T/transform-skew.png)
+
+#### 3D 变形
+
+[3D 变形示例代码](CSS/Transform3D.html)
+
+##### rotateY()
+
+3D 空间旋转。
+
+```
+transform: rotateY(<angle>)
+```
+
+##### perspective
+
+其用于设置图片 Y 轴旋转后的透视效果。`<length>` 可以理解为人眼与元素之间的距离，越紧则效果越明显。
+
+```
+perspective: none | <length>
+
+perspective: none;
+perspective: 2000px;
+perspective: 500px;
+```
+
+![](img/T/transform-perspective.png)
+
+##### perspective-origin
+
+其为设定透视的角度（透视位置均可设定为负值）。
+
+```
+perspective-origin: [ <percentage> | <length> | left | center | right | top | bottom] | [ [ <percentage> | <length> | left | center | right ] && [ <percentage> | <length> | top | center | bottom ] ]
+
+perspective-origin: 50% 50%
+<!-- 默认值为 50% 50% 正中间的位置进行透视-->
+perspective-origin: left bottom;
+perspective-origin: 50% -800px;
+perspective-origin: right;
+```
+
+![](img/T/transform-perspective-origin.png)
+
+##### translate3d()
+
+```
+translate3d(<translate-value>, <translate-value>, <length>)
+
+translateX(<translate-value>)
+translateY(<translate-value>)
+translateZ(<length>)
+
+transform: translate3d(10px, 20%, 50px);
+<!-- %的参照物为自身元素 -->
+transform: translateX(10px);
+transform: translateY(20%);
+transform: translateZ(-100px);
+```
+
+![](img/T/transform-translate3d.png)
+
+##### scale3d()
+
+```
+scale3d(<number>, <number>, <number>)
+
+scaleX(<number>)
+scaleY(<number>)
+scaleZ(<number>)
+
+transform: scale3d(1.2, 1.2, 1);
+transform: scale3d(1, 1.2, 1);
+transform: scale3d(1.2, 1, 1);
+transform: scaleZ(5);
+<!-- Z 轴的缩放扩大并不影响盒子大小 -->
+```
+
+![](img/T/transform-scale3d.png)
+
+##### rotate3d()
+
+取 X Y Z 三轴上的一点并于坐标原点连线，以连线为轴进行旋转（逆时针）。
+
+```
+rotate3d(<number>, <number>, <number>, <angle>)
+
+rotateX(<angle>)
+rotateY(<angle>)
+rotateZ(<angle>)
+
+transform: rotate3d(1, 0, 0, 45deg);
+<!-- 上面等同于 X 轴旋转 -->
+transform: rotate3d(0, 1, 0, 45deg);
+<!-- 上面等同于 Y 轴旋转 -->
+transform: rotate3d(0, 0, 1, 45deg);
+<!-- 上面等同于 2D 旋转 -->
+transform: rotate3d(1, 1, 1, 45deg);
+```
+
+![](img/T/transform-rotate3d.png)
+
+##### transform-style
+
+其用于设置保留内部的 3D 空间，原因是一个元素进行`transform`之后内部默认为`flat`。
+
+```
+transform-style: flat | perserve-3d
+
+<!-- 默认为 flat -->
+
+transform-style: flat;
+transform-style: preserve-3d;
+```
+
+![](img/T/transform-transform-style.png)
+
+##### backface-visibility
+
+其用于设置背面不可见。
+
+```
+backface-visibility: visible | hidden
+
+backface-visibility: visible;
+backface-visibility: hidden;
+```
+
+![](img/T/transform-backface-visibility.png)
+
+
+
 ### 动画
+
+[动画示例代码](CSS/Animation.html)
+
+#### transition
+
+[过度动画](CSS/Transition.html)
+
+其为众多 `<single-transition>` 的值缩写。（当两个时间同时出现是，第一个时间为动画长度，第二个时间为动画延时）
+
+```
+transition: <single-transition> [',' <single-transition>]*
+
+<single-transition> = [none | <single-transition-property>] || <time> || <single-transition-timing-function> || <time>
+
+
+transition: none;
+transition: left 2s ease 1s, color 2s;
+transition: 2s;
+```
+
+##### transition-property
+
+```
+transition-property: none | <single-traisition-property> [ ',' <single-transition-property>]*
+
+<single-transition-property> = all | <IDENT>
+
+transition-property: none;
+<!-- 默认值为 none -->
+transition-property: all;
+transition-property: left;
+transition-property: left, color;
+```
+
+##### transition-duration
+
+```
+transition-duration: <time>[, <time>]*
+
+transition-duration: 0s;
+transition-duration: 1s;
+transition-duration: 1s, 2s, 3s;
+```
+
+##### transition-delay
+
+```
+transition-delay: <time>[,<time>]*
+
+transition-delay: 0s;
+transition-delay: 1s;
+transition-delay: 1s, 2s, 3s;
+```
+
+##### transition-timing-function
+
+```
+transition-timing-function: <single-transition-timing-function>[',' <single-transition-timing-function>]*
+
+<!-- 默认函数为 ease -->
+<single-transition-timing-function> = ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>,<number>,<number>,<number>) | step-start | step-end | steps(<integer>)[, [start | end]]?)
+
+<!-- 对于 cubic-bezier 的曲线，前两个值为 P1 的坐标，后两值为 P2 的坐标 -->
+
+transition-timing-function: ease;
+transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+transition-timing-function: linear;
+transition-timing-function: cubic-bezier(0, 0, 1, 1);
+```
+
+![](img/T/transition-timing-function.png)
+
+#### animation
+
+```
+animation: <single-animation> [',' <single-animation>]*
+
+<single-animation> = <single-animation-name> || <time> || <single-animation-timing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode> || single-animation-play-state>
+
+animation: none;
+animation: abc 2s ease 0s 1 normal none running;
+animation: abc 2s;
+animation: abc 1s 2s both, abcd 2s both;
+<!-- 调用多个动画 -->
+```
+
+动画可自动运行，但`transition`需要触发。
+
+##### animation-name
+
+`animation-name` 的名字可自由定义。
+
+```
+animation-name: <single-animation-name>#
+
+<single-animation-name> = none | <IDENT>
+
+animation-name: none;
+animation-name: abc;
+animation-name: abc, abcd;
+```
+
+##### animation-duration
+
+与 `transition-duration` 属性值类似。
+
+```
+animation-duration: <time>[, <time>]*
+
+animation-duration: 0s;
+animation-duration: 1s;
+animation-duration: 1s, 2s, 3s;
+```
+
+##### animation-timing-function
+
+其与之前的 `transition-timing-function` 完全一模一样。
+
+```
+animation-timing-function: <timing-function>#
+
+<single-timing-function> = <single-transition-timing-function>
+
+animation-timing-function: ease;
+animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+animation-timing-function: linear;
+animation-timing-function: cubic-bezier(0, 0, 1, 1);
+animation-timing-function: ease, linear;
+```
+
+##### animation-iteration-count
+
+其用于动画执行的次数（其默认值为 1）。
+
+```
+animation-iteration-count: <single-animation-iteration-count>#
+
+<single-animation-iteration-count> = infinite | <number>
+
+animation-iteration-count: 1;
+animation-iteration-count: infinite;
+animation-iteration-count: 1, 2, infinite;
+```
+
+##### animation-direction
+
+其用于定义动画的运动方向。
+
+```
+animation-direction:<single-animation-direction>#
+
+<single-animation-direction> = normal | reverse | alternate | alternate-revers
+
+animation-direction: reverse
+<!-- 动画相反帧的播放 -->
+animation-direction: alternate
+<!-- 往返执行动画 -->
+animation-direction: alternate-revers
+<!-- 相反的往返动画 -->
+```
+
+##### animation-play-state
+
+其用于设定动画的播放状态。
+
+```
+animation-play-state: <single-animation-play-state>#
+
+<single-animation-play-state> = running | paused
+
+animation-play-state: running;
+animation-play-state: pasued;
+animation-play-state: running, paused;
+```
+
+##### animation-delay
+
+其用于设置动画的延时，同 `transition-delay` 值相同。
+
+```
+animation-delay: <time>[, <time>]*
+anim
+animation-delay: 0s;
+animation-delay: 1s;
+animation-delay: 1s, 2s, 3s;
+```
+
+##### animation-fill-mode
+
+其用于设置动画开始时，是否保持第一帧的动画和动画在结束时时候保持最后的状态。
+
+```
+animation-fill-mode: <single-animation-fill-mode>[',' <single-animation-fill-mode>]*
+
+<single-animation-fill-mode> = none | backwards | forwards | both
+
+animation-fill-mode: none;
+<!-- 不做设置 -->
+animation-fill-mode: backwards;
+<!-- 动画开始时出现在第一帧的状态 -->
+animation-fill-mode: forwards;
+<!-- 动画结束时保留动画结束时的状态 -->
+animation-fill-mode: both;
+<!-- 开始和结束时都应保留关键帧定义的状态（通常设定） -->
+animation-fill-mode: forwards, backwards;
+```
+
+##### @keyframes
+
+其用于定义关键帧。
+
+```
+<!-- 写法一 -->
+@keyframes abc {
+  from {opacity: 1; height: 100px;}
+  to {opacity: 0.5; height: 200px;}
+}
+
+<!-- 写法二 -->
+@keyframes abcd {
+  0% {opacity: 1; height: 100px;}
+  100% {opacity: 0.5; height: 200px}
+}
+
+@keyframes flash {
+  0%, 50%, 100% {opacity: 1;}
+  25%, 75% {opacity: 0;}
+}
+
+<!-- 例子 -->
+animation: abc 0.5s both;
+animation: flash 0.5s both;
+animaiton: abc 0.5s both, flash 0.5s both;
+```
+
+![](img/A/animation-sample.gif)
 
