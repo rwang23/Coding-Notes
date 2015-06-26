@@ -403,7 +403,7 @@ var obj1 = {name: 'Q', age: 14};
 
 ```javascript
 // Object.create(prototype[, propertiesObject])
-var prototype = {name: 'X', age: 13};
+var proto = {name: 'X', age: 13};
 var obj = Object.create(proto);
 ```
 
@@ -428,6 +428,7 @@ obj.c = 3;
 obj.hasOwnProperty('a'); // false
 obj.hasOwnProperty('c'); // true
 ```
+hasOwnProperty能看出是自身属性，还是原型链上的属性
 
 ### Boolean
 
@@ -439,6 +440,15 @@ obj.hasOwnProperty('c'); // true
 **原型对象属性及其方法
 - constructor, toString, valueOf
 
+其他类型向布尔型转化
+- 数字：0,NaN->false 其他true
+- 字符串：“”->false
+- undefined false
+- null false
+- 对象 true
+
+
+
 ### String
 
 **构造器说明**：单双引号内的字符串
@@ -446,8 +456,8 @@ obj.hasOwnProperty('c'); // true
 **实例化方法**
 ```javascript
 'Hello, world!'
-var str0 = 'Xinyang';
-var str1 = new String('Xinyang');
+var str0 = 'hello world';
+var str1 = new String('hello china');
 ```
 
 **属性及方法**
@@ -470,7 +480,7 @@ var str1 = new String('Xinyang');
 
 ```javascript
 // stringObject.indexOf(searchValue, fromIndex)
-var str = "I am X. From China!";
+var str = "I am Renfei From China!";
 var index = str.indexOf('a'); // 2
 str.indexOf('a', index + 1); // 16
 str.indexOf('Stupid'); // -1 字符串不存在
@@ -659,6 +669,7 @@ var p = new Point(1, 1);
 var circle = {x: 1, y: 1, r: 1};
 p.move.apply(circle, [2, 1]); // {x: 3, y: 2, r: 1}
 ```
+通过了p的move方法把circle的坐标改变
 
 #### Function.prototype.bind
 
@@ -678,7 +689,7 @@ Point.prototype.move = function(x, y) {
 
 var p = new Point(1, 1);
 var circle = {x: 1, y: 1, r: 1};
-var circleMoveRef = p.move.bind(circle, 2, 1);
+var circleMoveRef = p.move.bind(circle, 2, 1);//并未执行
 setTimeout(circleMoveRef, 1000); // {x: 3, y: 2, r: 1}
 
 // 之间使用 circleMoveRef() 效果等同于 apply()
@@ -932,14 +943,14 @@ Math.random(); // 0.14523562323461
 ```javascript
 // JSON.stringify(value[, replacer[, space]])
 var json = {'name': 'X'};
-JSON.stringify(json); // "{"name":"X"}"
+JSON.stringify(json); // '{"name":"X"}''
 ```
 
 ##### JSON.parse
 
 功能：将 JSON 字符转转换为对象
 
-```
+```javascript
 // JSON.parse(text[, reviver])
 var jsonStr = '{"name":"X"}';
 JSON.parse(jsonStr); // {name: 'X'}
@@ -1009,7 +1020,7 @@ parseInt('1f', 16); // 31
 
 功能：计算字符串并执行其中的 JavaScript 代码（会带来安全性和代码逻辑问题，通常不建议使用）
 
-```javascript
+```
 // eval(string)
 var res = '{"error": "0", "msg": "OK"};
 var obj;
@@ -1031,6 +1042,168 @@ var res = encodeURIComponent(uri);
 // 结果
 // http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab
 ```
+
+## 变量作用域
+
+变量的作用域值的是变量的生命周期和作用范围（全局与局部作用域的区别）。
+
+### 作用域介绍
+
+#### 静态作用域
+
+静态作用域有称为词法作用域，即指其在编译的阶段就可以决定变量的引用。**静态作用域**只更变量定义的位置有关与代码执行的顺序无关。
+
+```javascript
+var x = 0;
+function foo() {
+  alert(x);
+}
+
+function bar() {
+  var x = 20;
+  foo();
+}
+
+foo();
+```
+
+![](../img/S/scope-lexical-scope.png)
+
+#### 动态作用域
+
+动态作用域的变量引用只可在程序运行时刻决定（其通常通过动态栈来进行管理）。
+
+```javascript
+var x = 0;
+function foo() {
+  alert(x);
+}
+
+function bar() {
+  var x = 20;
+  foo();
+}
+
+foo();
+```
+
+![](../img/S/scope-dynamic-scope.gif)
+
+### JavaScript 变量作用域
+
+JavaScript （1）使用静态作用域，（2）其没有块级作用域（只有函数作用域，就是只有 function 用于可以定义作用域），（3）在 ES5 之作使用词法环境来管理作用域。
+
+#### 词法环境
+
+##### 组成
+
+用来描述静态作用域的数据结构。
+
+- 环境记录（record）（指形参，变量，函数等）
+- 外部词法环境的引用（outer）
+
+##### 创建
+
+在一段代码执行之前，先初始化词法环境。会被初始化的有：
+
+- 形参
+- 函数定义（创建函数对象，会保存当前作用域。见下图）
+- 变量定义（所有初始化值均为 `undefined`）
+
+![](img/S/scope-function-init.png)
+
+##### 结构
+
+```javascript
+var x = 10;
+function foo(y) {
+  var z = 30;
+  function bar(q) {
+    return x + y + z + q;
+  }
+  return bar;
+}
+var bar = foo(20);
+bar(40);
+```
+
+**全局词法作用域（初始化状态）**
+
+![](img/S/scope-global-init.png)
+
+**函数词法作用域**
+
+![](img/S/scope-structure.jpg)
+
+#### 关于词法环境的问题
+
+**命名冲突**
+
+形参，函数定义，变量名称命名冲突。其中的优先级的排序如下：
+
+```
+函数定义 > 形参 > 变量
+```
+
+**`arguments` 的使用**
+
+ 为函数中定义好的变量。
+
+**函数表达式与函数定义的区别**
+
+- 函数表达式是在执行时才创建函数对象。
+- 函数定义为在代码执行之前就进行创建的。
+
+#### with 语句
+
+`with` 会创造一个临时作用域。
+
+```javascript
+var foo = 'abc';
+with({
+  foo: 'bar';
+}) {
+  function f() {
+    alert(foo);
+  };
+  (function() {
+    alert(foo);
+  })();
+  f();
+}
+```
+
+#### try-catch 句法
+
+```
+try {
+  var e = 10;
+  throw new Error();
+} catch (e) {
+  function f() {
+    alert(e);
+  }
+  (function() {
+    alert(e);
+  })();
+  f();
+}
+```
+
+#### 带名称的函数表达式
+
+**下面例子为不常规的写法**
+
+```
+(function A(){
+  A = 1;
+  alert(A);
+})();
+```
+
+![](img/S/scope-function-with-name.png)
+
+
 
 ## 表达式与运算符
 
