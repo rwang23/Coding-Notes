@@ -569,6 +569,8 @@ NOTE：默认为文本左对齐。justify为两端对齐
 
 `vertical-align: baseline | sub | super | text-top | text-bottom | middle | top | bottom | <percentage> | <length>`
 
+- 默认是baseline
+
 NOTE：`<percentage>`的参照物为`line-height`
 
 ##### 文本缩进
@@ -965,6 +967,7 @@ background-position: <position>[, <position>]*
 
 /* 默认位置为 */
 background-position: 0 0;
+如果x或y设定了位置，另一个没有设置，那么另一个默认位置在50%处
 
 /* percentage 是图片所处的位置，20%就是容器的20%长 */
 background-position: 20% 50%;
@@ -1803,6 +1806,9 @@ transition-timing-function: <single-transition-timing-function>[',' <single-tran
 <!-- 默认函数为 ease -->
 <single-transition-timing-function> = ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(<number>,<number>,<number>,<number>) | step-start | step-end | steps(<integer>)[, [start | end]]?)
 
+- transition-timing-function:ease 两头慢中间快
+- linear匀速运行
+
 <!-- 对于 cubic-bezier 的曲线，前两个值为 P1 的坐标，后两值为 P2 的坐标 -->
 
 transition-timing-function: ease;
@@ -1815,11 +1821,11 @@ transition-timing-function: cubic-bezier(0, 0, 1, 1);
 
 #### animation
 
-```
 animation: <single-animation> [',' <single-animation>]*
 
-<single-animation> = <single-animation-name> || <time> || <single-animation-timing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode> || single-animation-play-state>
+*<single-animation> = <single-animation-name> || <time> || <single-animation-timing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode> || single-animation-play-state>*
 
+```
 animation: none;
 animation: abc 2s ease 0s 1 normal none running;
 animation: abc 2s;
