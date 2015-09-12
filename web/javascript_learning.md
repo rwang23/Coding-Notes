@@ -15,8 +15,34 @@ for(var x in o){
 
 ###Prototype
 当写原型属性时，才在它自己内部产生实际的属性
+function Person(){
+	Person.prototype.name = "Nicholar";
+	Person.prototype.age=29;
+	Person.prototype.jpb = "software Engineer";
+	person.prototype.sayName=function(){
+		alert(this.name);
+	}
+}
 
-组合原型和构造方法
+var person1=new Person();
+person1.sayName();//"Nicholas"
+var person2 = new Person();
+person2.sayName();//"Nicholas"
+
+但是原型也有问题，当在其中使用array的时候，对person1使用push的时候，person2也有push的内容，
+所以这个时候，要把这个东西提出来，改为
+function Person(name,age,job){
+	this.name=name;
+	this.age=age;
+	this.job=job;
+	this.friends=["shelby","cours"];
+}
+Person.prototype = {
+	constructor:Person,
+	sayName:function(){
+		alert(this.name);
+	}
+}
 
 
 
