@@ -14,6 +14,7 @@ for(var x in o){
 }
 
 
+
 ###Prototype
 当写原型属性时，才在它自己内部产生实际的属性
 function Person(){
