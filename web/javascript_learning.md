@@ -13,6 +13,14 @@ for(var x in o){
 	alert(o.x);//这个时候输出的是john 30 300
 }
 
+###Prototype
+当写原型属性时，才在它自己内部产生实际的属性
+
+组合原型和构造方法
+
+
+
+
 ***
 ###DOM：Document Object Model
 
