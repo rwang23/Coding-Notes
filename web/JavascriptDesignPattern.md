@@ -1067,7 +1067,7 @@ function bar() {
 foo();
 ```
 
-![](../img/S/scope-lexical-scope.png)
+![](img/S/scope-lexical-scope.png)
 
 #### 动态作用域
 
@@ -1087,7 +1087,7 @@ function bar() {
 foo();
 ```
 
-![](../img/S/scope-dynamic-scope.gif)
+![](img/S/scope-dynamic-scope.gif)
 
 ### JavaScript 变量作用域
 
@@ -1175,7 +1175,7 @@ with({
 
 #### try-catch 句法
 
-```
+```javascript
 try {
   var e = 10;
   throw new Error();
@@ -1194,7 +1194,7 @@ try {
 
 **下面例子为不常规的写法**
 
-```
+```javascript
 (function A(){
   A = 1;
   alert(A);
@@ -1203,7 +1203,25 @@ try {
 
 ![](img/S/scope-function-with-name.png)
 
+###Some Summary
 
+- with,catch语句可以临时改变js变量作用域
+- Js不使用动态作用域
+- Js不使用块级作用域
+- Js函数运行在它们被定义的作用域里
+
+```javascript
+var x=10;
+function foo(){
+  alert(x);
+}
+function bar(){
+  var x=20;
+  foo();
+}
+bar();
+```
+输出为10，而不是20，因为在foo中，x为10，bar是另外一个词法作用域
 
 ## 表达式与运算符
 

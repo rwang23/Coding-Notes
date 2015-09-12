@@ -1,9 +1,24 @@
 #Javascript Learning
 ```javascript
+
+
+##Basic Idea
+
+var o = new Object();
+o.name ="john";
+o.age=30;
+o.salary=300;
+for(var x in o){
+	alert(x);//这个时候输出的是name age salary
+	alert(o.x);//这个时候输出的是john 30 300
+}
+
 ***
 ###DOM：Document Object Model
 
 ##syntax
+
+
 
 	array.length 得到数组变量数量
 
